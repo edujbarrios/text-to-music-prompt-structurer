@@ -1,20 +1,149 @@
 {
+  // =========================================================
+  // CORE PRODUCTION QUALITIES
+  // =========================================================
   "lofi": "Lo-fi texture",
   "lo-fi": "Lo-fi texture",
   "clean mix": "Clean mix",
-  "wide stereo": "Wide stereo",
-  "cinematic": "Cinematic reverb",
-  "warm": "Warm tone",
   "polished": "Polished commercial",
   "raw": "Raw demo feel",
-  "reverb": "Heavy reverb",
-  "delay": "Delay effects",
-  "distortion": "Distortion",
-  "compressed": "Heavy compression",
+  "crisp": "Crisp production",
+  "studio": "Studio-quality production",
+  "demo": "Demo-quality recording",
+
+  // =========================================================
+  // TONE & TIMBRE
+  // =========================================================
+  "warm": "Warm tone",
+  "bright": "Bright tone",
+  "dark": "Dark tone",
   "analog": "Analog warmth",
   "digital": "Digital clarity",
-  "atmospheric": "Atmospheric",
+  "vintage": "Vintage production",
+  "modern": "Modern production",
+  "futuristic": "Futuristic production",
+
+  // =========================================================
+  // SPACE & STEREO IMAGE
+  // =========================================================
+  "wide stereo": "Wide stereo",
+  "wide mix": "Wide stereo mix",
+  "narrow": "Narrow stereo image",
+  "mono": "Mono mix",
+  "immersive": "Immersive spatial mix",
+  "3d": "3D spatial feel",
+  "surround": "Surround-style ambience",
+  "roomy": "Room ambience",
+  "close mic": "Close-miked sound",
+  "distant": "Distant sound perspective",
+
+  // =========================================================
+  // REVERB & DELAY FAMILY
+  // =========================================================
+  "reverb": "Heavy reverb",
+  "cinematic": "Cinematic reverb",
+  "hall reverb": "Large hall reverb",
+  "room reverb": "Room reverb",
+  "plate reverb": "Plate-style reverb",
+  "delay": "Delay effects",
+  "echo": "Echo delay",
+  "slapback": "Slapback delay",
+
+  // =========================================================
+  // DYNAMICS & COMPRESSION
+  // =========================================================
+  "compressed": "Heavy compression",
+  "glued": "Glue compression",
+  "sidechain": "Sidechain compression effect",
+  "punchy": "Punchy dynamics",
+  "dynamic": "High dynamic range",
+  "flat": "Flat dynamics",
+  "hard hitting": "Hard-hitting impact",
+  "soft dynamics": "Soft dynamics",
+
+  // =========================================================
+  // SATURATION & DISTORTION
+  // =========================================================
+  "distortion": "Distortion",
+  "saturated": "Saturated warmth",
+  "overdriven": "Overdriven signal",
+  "bitcrushed": "Bitcrushed texture",
+  "gritty": "Gritty texture",
+  "dirty": "Dirty texture",
+  "clean": "Clean texture",
+
+  // =========================================================
+  // MODULATION & FX
+  // =========================================================
+  "chorus": "Chorus effect",
+  "flanger": "Flanger effect",
+  "phaser": "Phaser effect",
+  "tremolo": "Tremolo effect",
+  "vibrato": "Vibrato effect",
+  "modulated": "Modulated FX",
+  "filtered": "Filtered sound",
+  "reverse": "Reverse effects",
+
+  // =========================================================
+  // TEXTURE & ATMOSPHERE
+  // =========================================================
+  "atmospheric": "Atmospheric soundscape",
+  "ambient": "Ambient texture",
+  "airy": "Airy texture",
+  "dense": "Dense texture",
+  "thick": "Thick sound",
+  "thin": "Thin sound",
+  "dreamlike": "Dreamlike atmosphere",
+  "hypnotic": "Hypnotic repetition",
+  "psychedelic": "Psychedelic effects",
+  "surreal": "Surreal soundscape",
+
+  // =========================================================
+  // ARRANGEMENT & DENSITY
+  // =========================================================
   "minimalist": "Minimalist production",
+  "minimal": "Minimal arrangement",
+  "sparse": "Sparse arrangement",
   "layered": "Heavily layered",
-  "crisp": "Crisp production"
+  "busy": "Busy arrangement",
+  "full": "Full arrangement",
+  "open": "Open arrangement",
+  "tight": "Tight arrangement",
+  "loose": "Loose arrangement",
+  "build up": "Gradual build-up",
+  "drop heavy": "Heavy drop emphasis",
+
+  // =========================================================
+  // RHYTHMIC / TRANSIENT FEEL
+  // =========================================================
+  "transient heavy": "Strong transients",
+  "soft attack": "Soft attack dynamics",
+  "sharp attack": "Sharp attack dynamics",
+  "punchy drums": "Punchy drum mix",
+  "lo-fi drums": "Lo-fi drums texture",
+
+  // =========================================================
+  // NOISE / IMPERFECTION
+  // =========================================================
+  "vinyl crackle": "Vinyl-style noise",
+  "tape hiss": "Tape hiss texture",
+  "noise floor": "Audible noise floor",
+  "imperfect": "Imperfect human feel",
+
+  // =========================================================
+  // PERFORMANCE & CONTEXT
+  // =========================================================
+  "live": "Live performance feel",
+  "rehearsal": "Rehearsal room feel",
+  "cinema mix": "Cinema-style mix",
+  "radio ready": "Radio-ready mix",
+
+  // =========================================================
+  // EXPERIMENTAL / ABSTRACT (LOWER CONFIDENCE, BUT WORKS)
+  // =========================================================
+  "experimental": "Experimental production",
+  "abstract": "Abstract sound design",
+  "glitch": "Glitch effects",
+  "stutter": "Stutter edits",
+  "granular": "Granular texture"
 }
