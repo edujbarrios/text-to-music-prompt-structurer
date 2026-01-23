@@ -1,0 +1,20 @@
+{
+  "phrases": {
+    "low energy": "Low energy",
+    "mid energy": "Medium energy",
+    "high energy": "High energy",
+    "minimal": "Minimal",
+    "maximal": "Maximal"
+  },
+  "keywords": {
+    "energetic": "High energy",
+    "chill": "Low energy",
+    "calm": "Low energy",
+    "intense": "High energy",
+    "relaxed": "Low energy",
+    "explosive": "High energy",
+    "mellow": "Low energy",
+    "aggressive": "High energy",
+    "peaceful": "Low energy"
+  }
+}

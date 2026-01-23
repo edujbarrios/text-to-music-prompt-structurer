@@ -1,0 +1,19 @@
+{
+  "female": "Female lead vocals",
+  "male": "Male lead vocals",
+  "duet": "Duet vocals",
+  "choir": "Choir vocals",
+  "harmonies": "Backing harmonies",
+  "autotune": "Autotune-style vocals",
+  "intimate": "Intimate vocals",
+  "powerful": "Powerful vocals",
+  "soft": "Soft vocals",
+  "raspy": "Raspy vocals",
+  "smooth": "Smooth vocals",
+  "falsetto": "Falsetto vocals",
+  "rap": "Rap vocals",
+  "spoken": "Spoken word",
+  "whispered": "Whispered vocals",
+  "screamed": "Screamed vocals",
+  "operatic": "Operatic vocals"
+}

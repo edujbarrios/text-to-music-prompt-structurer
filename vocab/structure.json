@@ -1,0 +1,15 @@
+{
+  "tokens": [
+    { "token": "intro", "label": "Intro" },
+    { "token": "verse", "label": "Verse" },
+    { "token": "pre-chorus", "label": "Pre-Chorus" },
+    { "token": "chorus", "label": "Chorus" },
+    { "token": "bridge", "label": "Bridge" },
+    { "token": "outro", "label": "Outro" },
+    { "token": "solo", "label": "Solo" },
+    { "token": "breakdown", "label": "Breakdown" },
+    { "token": "drop", "label": "Drop" },
+    { "token": "interlude", "label": "Interlude" }
+  ],
+  "preferred_order": ["Intro", "Verse", "Pre-Chorus", "Chorus", "Bridge", "Solo", "Breakdown", "Drop", "Outro"]
+}

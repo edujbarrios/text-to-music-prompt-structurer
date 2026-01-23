@@ -1,0 +1,15 @@
+{
+  "descriptors": {
+    "slow": "Slow",
+    "mid-tempo": "Mid-tempo",
+    "fast": "Fast",
+    "uptempo": "Up-tempo",
+    "ballad": "Slow ballad",
+    "moderate": "Moderate tempo",
+    "rapid": "Rapid",
+    "lento": "Lento",
+    "andante": "Andante",
+    "allegro": "Allegro",
+    "presto": "Presto"
+  }
+}
