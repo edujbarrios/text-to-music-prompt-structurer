@@ -109,8 +109,6 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### Extending
 
-Contributions are welcome!
-
 Add new genres, moods, or instruments by editing JSON files in `vocab/`:
 
 ```json
@@ -118,6 +116,7 @@ Add new genres, moods, or instruments by editing JSON files in `vocab/`:
   "your-genre": { "genre": "Your Genre", "subgenre": null }
 }
 ```
+and any other `/vocab` json file!
 ---
 
 ## License
@@ -135,4 +134,6 @@ MIT License - See [LICENSE](LICENSE)
 
 ---
 
-**DISCLAIMER:** This is an unofficial tool and is not affiliated with, endorsed by, or connected to [Suno AI](https://suno.ai) in any way.
+> [!CAUTION]
+> **DISCLAIMER:** This is an unofficial tool and is not affiliated with, endorsed by, or connected to [Suno AI](https://suno.ai) in any way.
+
