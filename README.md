@@ -5,12 +5,23 @@ Convert unstructured musical ideas into structured [Suno AI](https://suno.ai) pr
 > [!NOTE]
 > The quality of [Suno AI](https://suno.ai) output depends heavily on the quality of the prompt. This simple tool helps structure your ideas into clear, effective prompts.
 
+## Features
+
+✨ **Automatic Detection:**
+- 🎵 Musical genres and subgenres
+- 🎹 Musical keys/tonalities (C Major, D Minor, etc.)
+- 🎭 Moods and emotions
+- ⚡ Tempo and BPM
+- 🎸 Instruments
+- 🎚️ Production effects
+- 🗣️ Vocal styles and languages
+
 ---
 
 ## Quick Start
 
 ```bash
-python structurer.py "indie pop with acoustic guitar, sad and nostalgic, 120 bpm"
+python structurer.py "indie pop with acoustic guitar in d minor, sad and nostalgic, 120 bpm"
 ```
 
 Output:
@@ -18,6 +29,7 @@ Output:
 STYLE: Indie Pop
 MOOD: Sad, Nostalgic
 TEMPO: ~120 BPM
+KEY: D Minor
 INSTRUMENTS: Acoustic Guitar
 ```
 
@@ -101,6 +113,29 @@ INSTRUMENTS: Piano, Synths
 PRODUCTION: Lo-fi texture
 ```
 
+**Jazz with Key:**
+```bash
+python structurer.py "jazz in c# minor with saxophone and piano, smooth and mysterious"
+```
+```
+STYLE: Jazz
+MOOD: Mysterious
+KEY: C# Minor
+INSTRUMENTS: Piano, Saxophone
+```
+
+**Rock Ballad with Key:**
+```bash
+python structurer.py "rock ballad in e major with electric guitar and piano, emotional and uplifting, 85 bpm"
+```
+```
+STYLE: Rock
+MOOD: Uplifting
+TEMPO: ~85 BPM
+KEY: E Major
+INSTRUMENTS: Electric Guitar, Guitar, Piano
+```
+
 ---
 ## Contributing
 
@@ -109,14 +144,17 @@ Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### Extending
 
-Add new genres, moods, or instruments by editing JSON files in `vocab/`:
+Add new genres, moods, instruments, keys, or production effects by editing JSON files in `vocab/`:
 
+**Genres** (`vocab/genres.json`):
 ```json
 {
   "your-genre": { "genre": "Your Genre", "subgenre": null }
 }
 ```
-and any other `/vocab` json file!
+
+**Other vocabularies**: Edit `moods.json`, `instruments.json`, `production.json`, `vocals.json`, `languages.json`, etc.
+
 ---
 
 ## License

@@ -1,7 +1,4 @@
 {
-  // =========================================================
-  // CORE PRODUCTION QUALITIES
-  // =========================================================
   "lofi": "Lo-fi texture",
   "lo-fi": "Lo-fi texture",
   "clean mix": "Clean mix",
@@ -10,10 +7,6 @@
   "crisp": "Crisp production",
   "studio": "Studio-quality production",
   "demo": "Demo-quality recording",
-
-  // =========================================================
-  // TONE & TIMBRE
-  // =========================================================
   "warm": "Warm tone",
   "bright": "Bright tone",
   "dark": "Dark tone",
@@ -22,10 +15,6 @@
   "vintage": "Vintage production",
   "modern": "Modern production",
   "futuristic": "Futuristic production",
-
-  // =========================================================
-  // SPACE & STEREO IMAGE
-  // =========================================================
   "wide stereo": "Wide stereo",
   "wide mix": "Wide stereo mix",
   "narrow": "Narrow stereo image",
@@ -36,10 +25,6 @@
   "roomy": "Room ambience",
   "close mic": "Close-miked sound",
   "distant": "Distant sound perspective",
-
-  // =========================================================
-  // REVERB & DELAY FAMILY
-  // =========================================================
   "reverb": "Heavy reverb",
   "cinematic": "Cinematic reverb",
   "hall reverb": "Large hall reverb",
@@ -48,10 +33,6 @@
   "delay": "Delay effects",
   "echo": "Echo delay",
   "slapback": "Slapback delay",
-
-  // =========================================================
-  // DYNAMICS & COMPRESSION
-  // =========================================================
   "compressed": "Heavy compression",
   "glued": "Glue compression",
   "sidechain": "Sidechain compression effect",
@@ -60,10 +41,6 @@
   "flat": "Flat dynamics",
   "hard hitting": "Hard-hitting impact",
   "soft dynamics": "Soft dynamics",
-
-  // =========================================================
-  // SATURATION & DISTORTION
-  // =========================================================
   "distortion": "Distortion",
   "saturated": "Saturated warmth",
   "overdriven": "Overdriven signal",
@@ -71,10 +48,6 @@
   "gritty": "Gritty texture",
   "dirty": "Dirty texture",
   "clean": "Clean texture",
-
-  // =========================================================
-  // MODULATION & FX
-  // =========================================================
   "chorus": "Chorus effect",
   "flanger": "Flanger effect",
   "phaser": "Phaser effect",
@@ -83,10 +56,6 @@
   "modulated": "Modulated FX",
   "filtered": "Filtered sound",
   "reverse": "Reverse effects",
-
-  // =========================================================
-  // TEXTURE & ATMOSPHERE
-  // =========================================================
   "atmospheric": "Atmospheric soundscape",
   "ambient": "Ambient texture",
   "airy": "Airy texture",
@@ -97,10 +66,6 @@
   "hypnotic": "Hypnotic repetition",
   "psychedelic": "Psychedelic effects",
   "surreal": "Surreal soundscape",
-
-  // =========================================================
-  // ARRANGEMENT & DENSITY
-  // =========================================================
   "minimalist": "Minimalist production",
   "minimal": "Minimal arrangement",
   "sparse": "Sparse arrangement",
@@ -112,35 +77,19 @@
   "loose": "Loose arrangement",
   "build up": "Gradual build-up",
   "drop heavy": "Heavy drop emphasis",
-
-  // =========================================================
-  // RHYTHMIC / TRANSIENT FEEL
-  // =========================================================
   "transient heavy": "Strong transients",
   "soft attack": "Soft attack dynamics",
   "sharp attack": "Sharp attack dynamics",
   "punchy drums": "Punchy drum mix",
   "lo-fi drums": "Lo-fi drums texture",
-
-  // =========================================================
-  // NOISE / IMPERFECTION
-  // =========================================================
   "vinyl crackle": "Vinyl-style noise",
   "tape hiss": "Tape hiss texture",
   "noise floor": "Audible noise floor",
   "imperfect": "Imperfect human feel",
-
-  // =========================================================
-  // PERFORMANCE & CONTEXT
-  // =========================================================
   "live": "Live performance feel",
   "rehearsal": "Rehearsal room feel",
   "cinema mix": "Cinema-style mix",
   "radio ready": "Radio-ready mix",
-
-  // =========================================================
-  // EXPERIMENTAL / ABSTRACT (LOWER CONFIDENCE, BUT WORKS)
-  // =========================================================
   "experimental": "Experimental production",
   "abstract": "Abstract sound design",
   "glitch": "Glitch effects",

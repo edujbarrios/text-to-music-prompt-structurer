@@ -11,7 +11,8 @@ from suno_structurer.detectors import (
     KeywordListDetector,
     LanguageDetector,
     BPMDetector,
-    ThemeDetector
+    ThemeDetector,
+    KeyDetector
 )
 
 
@@ -29,6 +30,7 @@ class SunoPromptEngine:
         self.registry.register(KeywordListDetector(loader.load("production"), "production"))
         self.registry.register(KeywordListDetector(loader.load("vocals"), "vocal_style"))
         self.registry.register(LanguageDetector(loader.load("languages")))
+        self.registry.register(KeyDetector(loader.load("keys")))
         self.registry.register(BPMDetector())
         self.registry.register(ThemeDetector())
 

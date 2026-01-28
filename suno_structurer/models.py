@@ -15,6 +15,7 @@ class SunoPrompt:
     energy: Optional[str] = None
     tempo: Optional[str] = None
     bpm: Optional[int] = None
+    key: Optional[str] = None
     instruments: List[str] = field(default_factory=list)
     production: List[str] = field(default_factory=list)
     vocals: Optional[str] = None

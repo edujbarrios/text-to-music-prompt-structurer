@@ -15,6 +15,8 @@ def format_for_suno(p: SunoPrompt) -> str:
         lines.append(f"MOOD: {', '.join(p.mood)}")
     if p.bpm:
         lines.append(f"TEMPO: ~{p.bpm} BPM")
+    if p.key:
+        lines.append(f"KEY: {p.key}")
     if p.instruments:
         lines.append(f"INSTRUMENTS: {', '.join(p.instruments)}")
     if p.production:

@@ -71,3 +71,21 @@ class ThemeDetector(Detector):
         m = re.search(r"about\s+(.+)", text)
         if m:
             prompt.theme = m.group(1).strip()[:120]
+
+
+class KeyDetector(Detector):
+    """Detects musical key/tonality from text."""
+    
+    def __init__(self, keys):
+        self.keys = keys
+
+    def detect(self, text, prompt):
+        # Sort keys by length (descending) to match longer patterns first
+        # This prevents "c major" from being matched as just "c" if "c#" exists
+        sorted_keys = sorted(self.keys.items(), key=lambda x: len(x[0]), reverse=True)
+        
+        for key, val in sorted_keys:
+            # Use word boundary matching for better accuracy
+            if re.search(rf"\b{re.escape(key)}\b", text):
+                prompt.key = val
+                return
