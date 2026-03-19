@@ -22,5 +22,7 @@ class SunoPrompt:
     vocal_style: List[str] = field(default_factory=list)
     language: Optional[str] = None
     structure: List[str] = field(default_factory=list)
+    rhythm: List[str] = field(default_factory=list)
+    era: Optional[str] = None
     theme: Optional[str] = None
     notes: List[str] = field(default_factory=list)

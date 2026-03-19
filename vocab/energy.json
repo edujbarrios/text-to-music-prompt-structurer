@@ -2,9 +2,15 @@
   "phrases": {
     "low energy": "Low energy",
     "mid energy": "Medium energy",
+    "medium energy": "Medium energy",
     "high energy": "High energy",
     "minimal": "Minimal",
-    "maximal": "Maximal"
+    "maximal": "Maximal",
+    "building energy": "Building energy",
+    "fading energy": "Fading energy",
+    "steady energy": "Steady energy",
+    "fluctuating energy": "Fluctuating energy",
+    "subtle energy": "Subtle energy"
   },
   "keywords": {
     "energetic": "High energy",
@@ -15,6 +21,17 @@
     "explosive": "High energy",
     "mellow": "Low energy",
     "aggressive": "High energy",
-    "peaceful": "Low energy"
+    "peaceful": "Low energy",
+    "driving": "Driving energy",
+    "hypnotic": "Hypnotic energy",
+    "restrained": "Restrained energy",
+    "pulsating": "Pulsating energy",
+    "frantic": "Frantic energy",
+    "subdued": "Low energy",
+    "vibrant": "High energy",
+    "lethargic": "Low energy",
+    "frenzied": "High energy",
+    "soothing": "Low energy",
+    "punchy": "Punchy energy"
   }
 }

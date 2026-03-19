@@ -9,10 +9,15 @@ from suno_structurer.registry import DetectorRegistry
 from suno_structurer.detectors import (
     GenreDetector,
     KeywordListDetector,
+    SingleKeywordDetector,
     LanguageDetector,
     BPMDetector,
     ThemeDetector,
-    KeyDetector
+    KeyDetector,
+    EnergyDetector,
+    StructureDetector,
+    RhythmDetector,
+    EraDetector,
 )
 
 
@@ -32,6 +37,11 @@ class SunoPromptEngine:
         self.registry.register(LanguageDetector(loader.load("languages")))
         self.registry.register(KeyDetector(loader.load("keys")))
         self.registry.register(BPMDetector())
+        self.registry.register(SingleKeywordDetector(loader.load("tempo")["descriptors"], "tempo"))
+        self.registry.register(EnergyDetector(loader.load("energy")))
+        self.registry.register(StructureDetector(loader.load("structure")))
+        self.registry.register(RhythmDetector(loader.load("rhythm")))
+        self.registry.register(EraDetector(loader.load("era")))
         self.registry.register(ThemeDetector())
 
     def process(self, text: str) -> SunoPrompt:

@@ -17,7 +17,11 @@ class GenreDetector(Detector):
     """Detects musical genres from text."""
     
     def __init__(self, genres):
-        self.genres = genres
+        # Sort by key length descending so specific subgenres are matched before
+        # their parent genre keywords (e.g. "bebop" before "jazz").
+        self.genres = dict(
+            sorted(genres.items(), key=lambda x: len(x[0]), reverse=True)
+        )
 
     def detect(self, text, prompt):
         for key, val in self.genres.items():
@@ -28,7 +32,7 @@ class GenreDetector(Detector):
 
 
 class KeywordListDetector(Detector):
-    """Generic detector for keyword-based attributes."""
+    """Generic detector for keyword-based list attributes."""
     
     def __init__(self, source, target_attr):
         self.source = source
@@ -40,6 +44,20 @@ class KeywordListDetector(Detector):
             if re.search(rf"\b{re.escape(key)}\b", text):
                 hits.append(val)
         setattr(prompt, self.target_attr, list(dict.fromkeys(hits)))
+
+
+class SingleKeywordDetector(Detector):
+    """Detector for single-value keyword attributes (sets the first match)."""
+
+    def __init__(self, source, target_attr):
+        self.source = source
+        self.target_attr = target_attr
+
+    def detect(self, text, prompt):
+        for key, val in self.source.items():
+            if re.search(rf"\b{re.escape(key)}\b", text):
+                setattr(prompt, self.target_attr, val)
+                return
 
 
 class LanguageDetector(Detector):
@@ -88,4 +106,73 @@ class KeyDetector(Detector):
             # Use word boundary matching for better accuracy
             if re.search(rf"\b{re.escape(key)}\b", text):
                 prompt.key = val
+                return
+
+
+class EnergyDetector(Detector):
+    """Detects energy level from the energy vocabulary (phrases + keywords)."""
+
+    def __init__(self, energy_vocab):
+        self.phrases = energy_vocab.get("phrases", {})
+        self.keywords = energy_vocab.get("keywords", {})
+
+    def detect(self, text, prompt):
+        # Check multi-word phrases first (more specific)
+        for key, val in self.phrases.items():
+            if key in text:
+                prompt.energy = val
+                return
+        # Fall back to single keywords
+        for key, val in self.keywords.items():
+            if re.search(rf"\b{re.escape(key)}\b", text):
+                prompt.energy = val
+                return
+
+
+class StructureDetector(Detector):
+    """Detects song-structure sections (intro, verse, chorus, …) from text."""
+
+    def __init__(self, structure_vocab):
+        self.tokens = {
+            item["token"]: item["label"]
+            for item in structure_vocab.get("tokens", [])
+        }
+
+    def detect(self, text, prompt):
+        hits = []
+        for token, label in self.tokens.items():
+            if re.search(rf"\b{re.escape(token)}\b", text):
+                hits.append(label)
+        prompt.structure = list(dict.fromkeys(hits))
+
+
+class RhythmDetector(Detector):
+    """Detects rhythm patterns and time signatures from text."""
+
+    def __init__(self, rhythm_vocab):
+        self.time_signatures = rhythm_vocab.get("time_signatures", {})
+        self.patterns = rhythm_vocab.get("patterns", {})
+
+    def detect(self, text, prompt):
+        hits = []
+        # Time signatures may include "/" so use plain substring match
+        for key, val in self.time_signatures.items():
+            if key in text:
+                hits.append(val)
+        for key, val in self.patterns.items():
+            if re.search(rf"\b{re.escape(key)}\b", text):
+                hits.append(val)
+        prompt.rhythm = list(dict.fromkeys(hits))
+
+
+class EraDetector(Detector):
+    """Detects music era / decade references from text."""
+
+    def __init__(self, era_vocab):
+        self.eras = era_vocab
+
+    def detect(self, text, prompt):
+        for key, val in self.eras.items():
+            if key in text:
+                prompt.era = val
                 return
