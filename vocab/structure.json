@@ -9,7 +9,28 @@
     { "token": "solo", "label": "Solo" },
     { "token": "breakdown", "label": "Breakdown" },
     { "token": "drop", "label": "Drop" },
-    { "token": "interlude", "label": "Interlude" }
+    { "token": "interlude", "label": "Interlude" },
+    { "token": "hook", "label": "Hook" },
+    { "token": "refrain", "label": "Refrain" },
+    { "token": "riff", "label": "Riff" },
+    { "token": "fill", "label": "Fill" },
+    { "token": "coda", "label": "Coda" },
+    { "token": "vamp", "label": "Vamp" },
+    { "token": "turnaround", "label": "Turnaround" },
+    { "token": "pre-verse", "label": "Pre-Verse" },
+    { "token": "post-chorus", "label": "Post-Chorus" },
+    { "token": "build", "label": "Build" },
+    { "token": "buildup", "label": "Build-Up" },
+    { "token": "skit", "label": "Skit" },
+    { "token": "tag", "label": "Tag" },
+    { "token": "ad lib", "label": "Ad Lib" },
+    { "token": "instrumental", "label": "Instrumental Section" },
+    { "token": "modulation", "label": "Modulation" }
   ],
-  "preferred_order": ["Intro", "Verse", "Pre-Chorus", "Chorus", "Bridge", "Solo", "Breakdown", "Drop", "Outro"]
+  "preferred_order": [
+    "Intro", "Pre-Verse", "Verse", "Pre-Chorus", "Chorus", "Post-Chorus",
+    "Bridge", "Solo", "Riff", "Build", "Build-Up", "Breakdown", "Drop",
+    "Refrain", "Hook", "Vamp", "Turnaround", "Fill", "Interlude",
+    "Skit", "Tag", "Ad Lib", "Modulation", "Coda", "Outro"
+  ]
 }
