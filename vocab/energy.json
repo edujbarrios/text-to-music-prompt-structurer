@@ -10,7 +10,12 @@
     "fading energy": "Fading energy",
     "steady energy": "Steady energy",
     "fluctuating energy": "Fluctuating energy",
-    "subtle energy": "Subtle energy"
+    "subtle energy": "Subtle energy",
+    "peak energy": "Peak energy",
+    "rising energy": "Rising energy",
+    "dropping energy": "Dropping energy",
+    "sustained energy": "Sustained energy",
+    "explosive energy": "Explosive energy"
   },
   "keywords": {
     "energetic": "High energy",
@@ -32,6 +37,21 @@
     "lethargic": "Low energy",
     "frenzied": "High energy",
     "soothing": "Low energy",
-    "punchy": "Punchy energy"
+    "punchy": "Punchy energy",
+    "thunderous": "High energy",
+    "gentle": "Low energy",
+    "quiet": "Low energy",
+    "loud": "High energy",
+    "fierce": "High energy",
+    "dynamic": "Dynamic energy",
+    "volatile": "Volatile energy",
+    "smoldering": "Smoldering energy",
+    "raw energy": "Raw energy",
+    "kinetic": "Kinetic energy",
+    "languid": "Low energy",
+    "spirited": "High energy",
+    "ferocious": "High energy",
+    "tranquil": "Low energy",
+    "serene": "Low energy"
   }
 }

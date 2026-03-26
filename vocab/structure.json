@@ -25,12 +25,27 @@
     { "token": "tag", "label": "Tag" },
     { "token": "ad lib", "label": "Ad Lib" },
     { "token": "instrumental", "label": "Instrumental Section" },
-    { "token": "modulation", "label": "Modulation" }
+    { "token": "modulation", "label": "Modulation" },
+    { "token": "fade out", "label": "Fade Out" },
+    { "token": "fade-out", "label": "Fade Out" },
+    { "token": "fade in", "label": "Fade In" },
+    { "token": "fade-in", "label": "Fade In" },
+    { "token": "reprise", "label": "Reprise" },
+    { "token": "transition", "label": "Transition" },
+    { "token": "stinger", "label": "Stinger" },
+    { "token": "climax", "label": "Climax" },
+    { "token": "rise", "label": "Rise" },
+    { "token": "ambient section", "label": "Ambient Section" },
+    { "token": "a cappella section", "label": "A Cappella Section" },
+    { "token": "freestyle", "label": "Freestyle" }
   ],
   "preferred_order": [
-    "Intro", "Pre-Verse", "Verse", "Pre-Chorus", "Chorus", "Post-Chorus",
+    "Intro", "Fade In", "Pre-Verse", "Verse", "Pre-Chorus", "Chorus", "Post-Chorus",
     "Bridge", "Solo", "Riff", "Build", "Build-Up", "Breakdown", "Drop",
     "Refrain", "Hook", "Vamp", "Turnaround", "Fill", "Interlude",
-    "Skit", "Tag", "Ad Lib", "Modulation", "Coda", "Outro"
+    "Skit", "Tag", "Ad Lib", "Modulation",
+    "Transition", "Reprise", "Climax", "Rise", "Ambient Section",
+    "A Cappella Section", "Freestyle", "Stinger", "Fade Out",
+    "Coda", "Outro"
   ]
 }

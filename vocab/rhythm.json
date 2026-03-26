@@ -12,7 +12,11 @@
     "2/2": "Cut time",
     "common time": "4/4 time",
     "waltz time": "3/4 time",
-    "compound time": "Compound time"
+    "compound time": "Compound time",
+    "3/8": "3/8 time",
+    "6/4": "6/4 time",
+    "5/8": "5/8 time",
+    "11/8": "11/8 time"
   },
   "patterns": {
     "swing": "Swing feel",
@@ -50,6 +54,24 @@
     "bouncy": "Bouncy feel",
     "gallop": "Gallop rhythm",
     "blast beat": "Blast beat",
-    "blast beats": "Blast beat"
+    "blast beats": "Blast beat",
+    "dembow": "Dembow rhythm",
+    "tresillo": "Tresillo pattern",
+    "bossa nova rhythm": "Bossa nova rhythm",
+    "montuno": "Montuno pattern",
+    "son clave": "Son clave rhythm",
+    "rumba clave": "Rumba clave rhythm",
+    "second line": "Second line groove",
+    "soca beat": "Soca beat",
+    "dancehall rhythm": "Dancehall rhythm",
+    "reggaeton beat": "Reggaeton beat",
+    "afrobeat rhythm": "Afrobeat rhythm",
+    "cumbia rhythm": "Cumbia rhythm",
+    "march": "March rhythm",
+    "marching": "March rhythm",
+    "funk groove": "Funk groove",
+    "boom bap beat": "Boom bap beat",
+    "trap beat": "Trap beat pattern",
+    "drill beat": "Drill beat pattern"
   }
 }
