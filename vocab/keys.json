@@ -30,5 +30,7 @@
   "bb major": "Bb Major",
   "bb minor": "Bb Minor",
   "b major": "B Major",
-  "b minor": "B Minor"
+  "b minor": "B Minor",
+  "db minor": "Db Minor",
+  "gb minor": "Gb Minor"
 }
