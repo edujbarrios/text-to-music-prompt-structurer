@@ -26,6 +26,18 @@
     "half-time feel": "Half-time feel",
     "double-time feel": "Double-time feel",
     "brisk": "Brisk",
-    "leisurely": "Leisurely"
+    "leisurely": "Leisurely",
+    "andantino": "Andantino",
+    "tempo rubato": "Rubato",
+    "accelerando": "Accelerando",
+    "ritardando": "Ritardando",
+    "a tempo": "A tempo",
+    "rallentando": "Rallentando",
+    "stringendo": "Stringendo",
+    "steady": "Steady tempo",
+    "groovy tempo": "Groovy tempo",
+    "sluggish": "Sluggish tempo",
+    "frantic tempo": "Frantic tempo",
+    "crawling": "Crawling tempo"
   }
 }
