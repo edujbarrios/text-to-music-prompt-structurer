@@ -1,5 +1,8 @@
 # Text-to-Music Prompt Structurer
 
+[![PyPI](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/text-to-music-prompt-structurer/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/edujbarrios/text-to-music-prompt-structurer/blob/main/LICENSE)
+
 Turn free-form musical ideas into consistent, structured prompts for text-to-music workflows.
 
 Text-to-Music Prompt Structurer detects the musical details in a plain-language description—such as genre, mood, tempo, key, instrumentation, production, vocals, and language—and organizes them into a predictable result. The included formatter produces concise, Suno-compatible prompt output, while the structured Python model can be used in other music-generation workflows.
@@ -16,7 +19,7 @@ Text-to-Music Prompt Structurer detects the musical details in a plain-language 
 
 ## Quick start
 
-After the first PyPI release, install the package with:
+Install the package from [PyPI](https://pypi.org/project/text-to-music-prompt-structurer/):
 
 ```bash
 python -m pip install text-to-music-prompt-structurer
@@ -48,10 +51,10 @@ Requires Python 3.10 or later. No external packages are required.
 
 ### Command line
 
-Pass a musical description as a single quoted argument:
+After installation, pass a musical description to the `text-to-music-prompt` command:
 
 ```bash
-python structurer.py "latin trap at 90 bpm with 808 and hi-hats, dark mood, male vocals in Spanish"
+text-to-music-prompt "latin trap at 90 bpm with 808 and hi-hats, dark mood, male vocals in Spanish"
 ```
 
 The command prints only the fields detected in the description:
@@ -141,7 +144,7 @@ To extend detection, add terms to the relevant file in [`text_to_music_prompt_st
 
 ```text
 text-to-music-prompt-structurer/
-├── structurer.py                         # Command-line entry point
+├── structurer.py                         # Source-checkout entry point
 ├── example_module_usage.py               # Programmatic examples
 ├── text_to_music_prompt_structurer/      # Engine, data model, and vocabularies
 ├── CONTRIBUTING.md
