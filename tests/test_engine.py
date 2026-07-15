@@ -65,6 +65,23 @@ def test_genre_detection_does_not_match_inside_words() -> None:
     assert prompt.subgenre is None
 
 
+def test_engine_detects_language_voice_type_tone_and_style() -> None:
+    prompt = MusicPromptEngine().process(
+        "soul pop with warm breathy female alto vocals in spanish, intimate and melismatic"
+    )
+
+    assert prompt.language == "Spanish"
+    assert prompt.voice_type == ["Female Lead", "Alto"]
+    assert prompt.vocal_tone == ["Warm", "Breathy", "Intimate"]
+    assert prompt.vocal_style == ["Melismatic vocals"]
+
+
+def test_vocal_tones_require_vocal_context() -> None:
+    prompt = MusicPromptEngine().process("warm bright synthwave with soft pads")
+
+    assert prompt.vocal_tone == []
+
+
 def test_custom_vocabulary_directory_is_supported(tmp_path) -> None:
     bundled = resources.files("text_to_music_prompt_structurer").joinpath("vocab")
     vocab_dir = tmp_path / "vocab"

@@ -17,6 +17,7 @@ from text_to_music_prompt_structurer.detectors import (
     SingleKeywordDetector,
     StructureDetector,
     ThemeDetector,
+    VocalAttributeDetector,
 )
 from text_to_music_prompt_structurer.loaders import VocabLoader
 from text_to_music_prompt_structurer.models import MusicPrompt
@@ -40,7 +41,9 @@ class MusicPromptEngine:
         self.registry.register(KeywordListDetector(loader.load("moods"), "mood"))
         self.registry.register(KeywordListDetector(loader.load("instruments"), "instruments"))
         self.registry.register(KeywordListDetector(loader.load("production"), "production"))
-        self.registry.register(KeywordListDetector(loader.load("vocals"), "vocal_style"))
+        self.registry.register(VocalAttributeDetector(loader.load("voice_types"), "voice_type"))
+        self.registry.register(VocalAttributeDetector(loader.load("vocal_tones"), "vocal_tone"))
+        self.registry.register(VocalAttributeDetector(loader.load("vocals"), "vocal_style"))
         self.registry.register(LanguageDetector(loader.load("languages")))
         self.registry.register(KeyDetector(loader.load("keys")))
         self.registry.register(BPMDetector())

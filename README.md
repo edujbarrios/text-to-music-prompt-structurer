@@ -5,7 +5,7 @@
 
 Turn free-form musical ideas into structured prompts for text-to-music workflows.
 
-The package detects genre, mood, BPM, key, instruments, production details, vocals, and language. It has no runtime dependencies and requires Python 3.10 or later.
+The package detects genre, mood, BPM, key, instruments, production details, language, voice type, vocal tone, and vocal technique. It has no runtime dependencies and requires Python 3.10 or later.
 
 ## Install
 
@@ -16,17 +16,23 @@ python -m pip install text-to-music-prompt-structurer
 ## Command line
 
 ```bash
-text-to-music-prompt "indie pop with acoustic guitar in d minor, sad and nostalgic, 120 bpm"
+text-to-music-prompt "neo soul with piano, warm breathy female alto vocals in Spanish, intimate and melismatic, in d minor, nostalgic, 92 bpm"
 ```
 
 Output:
 
 ```text
-STYLE: Indie Pop
-MOOD: Sad, Nostalgic
-BPM: ~120
+STYLE: Soul / Neo Soul
+MOOD: Nostalgic, Warm
+BPM: ~92
 KEY: D Minor
-INSTRUMENTS: Acoustic Guitar, Guitar
+INSTRUMENTS: Piano
+PRODUCTION: Warm tone
+VOCALS:
+  LANGUAGE: Spanish
+  VOICE TYPE: Female Lead, Alto
+  TONE: Warm, Breathy, Intimate
+  STYLE: Melismatic vocals
 ```
 
 ## Python
@@ -41,7 +47,7 @@ prompt = MusicPromptEngine().process(
 print(format_prompt(prompt))
 ```
 
-The returned `MusicPrompt` object provides structured fields including `genre`, `subgenre`, `mood`, `bpm`, `tempo`, `key`, `instruments`, `production`, `vocals`, and `language`.
+The returned `MusicPrompt` object provides structured fields including `genre`, `subgenre`, `mood`, `bpm`, `tempo`, `key`, `instruments`, `production`, `language`, `voice_type`, `vocal_tone`, and `vocal_style`.
 
 ## Development
 

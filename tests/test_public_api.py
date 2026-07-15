@@ -30,6 +30,23 @@ def test_formatter_renders_detected_fields() -> None:
     )
 
 
+def test_formatter_groups_vocal_controls_and_language() -> None:
+    prompt = MusicPrompt(
+        language="Spanish",
+        voice_type=["Female Lead", "Alto"],
+        vocal_tone=["Warm", "Breathy"],
+        vocal_style=["Melismatic vocals"],
+    )
+
+    assert format_prompt(prompt) == (
+        "VOCALS:\n"
+        "  LANGUAGE: Spanish\n"
+        "  VOICE TYPE: Female Lead, Alto\n"
+        "  TONE: Warm, Breathy\n"
+        "  STYLE: Melismatic vocals"
+    )
+
+
 def test_suno_names_remain_compatible() -> None:
     assert SunoPrompt is MusicPrompt
     assert SunoPromptEngine is MusicPromptEngine
