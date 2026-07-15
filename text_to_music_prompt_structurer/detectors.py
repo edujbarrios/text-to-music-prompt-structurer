@@ -172,3 +172,5 @@ class EraDetector(Detector):
             if key in text:
                 prompt.era = val
                 return
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0
