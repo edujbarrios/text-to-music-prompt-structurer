@@ -32,7 +32,7 @@ KEY: D Minor
 INSTRUMENTS: Acoustic Guitar, Guitar
 ```
 
-Requires Python 3.7 or later. No external packages are required.
+Requires Python 3.9 or later. No external packages are required.
 
 ## Usage
 
