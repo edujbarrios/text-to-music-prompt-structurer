@@ -45,6 +45,18 @@ class KeywordListDetector(Detector):
         setattr(prompt, self.target_attr, list(dict.fromkeys(hits)))
 
 
+class VocalAttributeDetector(KeywordListDetector):
+    """Detect a vocal attribute only when the prompt asks for a voice."""
+
+    _vocal_context = re.compile(
+        r"\b(vocal|vocals|voice|voices|singer|singers|singing|sung|choir|duet)\b"
+    )
+
+    def detect(self, text, prompt):
+        if self._vocal_context.search(text):
+            super().detect(text, prompt)
+
+
 class SingleKeywordDetector(Detector):
     """Detector for single-value keyword attributes (sets the first match)."""
 

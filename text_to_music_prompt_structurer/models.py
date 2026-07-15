@@ -19,6 +19,8 @@ class MusicPrompt:
     instruments: list[str] = field(default_factory=list)
     production: list[str] = field(default_factory=list)
     vocals: str | None = None
+    voice_type: list[str] = field(default_factory=list)
+    vocal_tone: list[str] = field(default_factory=list)
     vocal_style: list[str] = field(default_factory=list)
     language: str | None = None
     structure: list[str] = field(default_factory=list)
