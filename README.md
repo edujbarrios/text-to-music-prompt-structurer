@@ -1,6 +1,6 @@
 # Text-to-Music Prompt Structurer
 
-[![PyPI](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/text-to-music-prompt-structurer/)
+[![PyPI version](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=3775A9&cacheSeconds=300)](https://pypi.org/project/text-to-music-prompt-structurer/)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-orange.svg?style=for-the-badge)](https://github.com/edujbarrios/text-to-music-prompt-structurer/blob/main/LICENSE)
 
 Turn free-form musical ideas into structured prompts for text-to-music workflows.
