@@ -16,10 +16,20 @@ Text-to-Music Prompt Structurer detects the musical details in a plain-language 
 
 ## Quick start
 
+After the first PyPI release, install the package with:
+
+```bash
+python -m pip install text-to-music-prompt-structurer
+text-to-music-prompt "indie pop with acoustic guitar in d minor, sad and nostalgic, 120 bpm"
+```
+
+To run the latest source checkout instead:
+
 ```bash
 git clone https://github.com/edujbarrios/text-to-music-prompt-structurer.git
 cd text-to-music-prompt-structurer
-python structurer.py "indie pop with acoustic guitar in d minor, sad and nostalgic, 120 bpm"
+python -m pip install -e .
+text-to-music-prompt "indie pop with acoustic guitar in d minor, sad and nostalgic, 120 bpm"
 ```
 
 Example output:
@@ -141,6 +151,17 @@ text-to-music-prompt-structurer/
 ## Contributing
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidance on vocabulary additions and new detection strategies.
+
+For local development:
+
+```bash
+python -m pip install -e ".[dev]"
+python -m pytest
+ruff check .
+ruff format --check .
+```
+
+Release history is maintained in [CHANGELOG.md](CHANGELOG.md), and maintainer release instructions are in [PUBLISHING.md](PUBLISHING.md).
 
 ## License
 
