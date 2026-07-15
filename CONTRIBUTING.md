@@ -24,9 +24,9 @@ Thanks for your interest in contributing to the Text-to-Music Prompt Structurer 
 La forma más fácil de contribuir es expandir los vocabularios JSON:
 
 1. Fork el repositorio
-2. Edita los archivos en `vocab/`:
+2. Edita los archivos en `text_to_music_prompt_structurer/vocab/`:
    ```json
-   // vocab/genres.json
+   // text_to_music_prompt_structurer/vocab/genres.json
    {
      "tu-nuevo-genero": { "genre": "Tu Nuevo Género", "subgenre": null }
    }
@@ -39,7 +39,7 @@ Si quieres agregar una nueva categoría de detección:
 
 1. Crea el archivo JSON de vocabulario:
    ```json
-   // vocab/tu_categoria.json
+   // text_to_music_prompt_structurer/vocab/tu_categoria.json
    {
      "keyword1": "Valor 1",
      "keyword2": "Valor 2"
@@ -97,7 +97,7 @@ Tipos:
 ## Extender Vocabularios
 
 ### Géneros Musicales
-Agrega a `vocab/genres.json`:
+Agrega a `text_to_music_prompt_structurer/vocab/genres.json`:
 ```json
 {
   "key-name": { 
@@ -108,7 +108,7 @@ Agrega a `vocab/genres.json`:
 ```
 
 ### Moods
-Agrega a `vocab/moods.json`:
+Agrega a `text_to_music_prompt_structurer/vocab/moods.json`:
 ```json
 {
   "keyword": "Mood Descriptor"
@@ -116,7 +116,7 @@ Agrega a `vocab/moods.json`:
 ```
 
 ### Instrumentos
-Agrega a `vocab/instruments.json`:
+Agrega a `text_to_music_prompt_structurer/vocab/instruments.json`:
 ```json
 {
   "search-term": "Display Name"

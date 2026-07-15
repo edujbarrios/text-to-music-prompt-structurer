@@ -99,7 +99,7 @@ Available fields include:
 
 ## How it works
 
-The processing pipeline loads the JSON vocabularies in [`vocab/`](vocab), runs registered detection strategies against the input text, and returns a structured prompt model. The formatter then renders the detected fields as a compact text prompt.
+The processing pipeline loads the bundled JSON vocabularies in [`text_to_music_prompt_structurer/vocab/`](text_to_music_prompt_structurer/vocab), runs registered detection strategies against the input text, and returns a structured prompt model. The formatter then renders the detected fields as a compact text prompt.
 
 ```text
 musical description
@@ -123,7 +123,7 @@ The repository includes editable JSON vocabularies for:
 - production and mixing
 - vocals and languages
 
-To extend detection, add terms to the relevant file in [`vocab/`](vocab). Detector behavior can be extended in [`text_to_music_prompt_structurer/`](text_to_music_prompt_structurer).
+To extend detection, add terms to the relevant file in [`text_to_music_prompt_structurer/vocab/`](text_to_music_prompt_structurer/vocab). Detector behavior can be extended in [`text_to_music_prompt_structurer/`](text_to_music_prompt_structurer).
 
 ## Project structure
 
@@ -131,8 +131,7 @@ To extend detection, add terms to the relevant file in [`vocab/`](vocab). Detect
 text-to-music-prompt-structurer/
 ├── structurer.py                         # Command-line entry point
 ├── example_module_usage.py               # Programmatic examples
-├── text_to_music_prompt_structurer/      # Detection engine and data model
-├── vocab/                                # JSON vocabularies
+├── text_to_music_prompt_structurer/      # Engine, data model, and vocabularies
 ├── CONTRIBUTING.md
 └── LICENSE
 ```

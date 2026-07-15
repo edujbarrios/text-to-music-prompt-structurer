@@ -41,3 +41,6 @@ text-to-music-prompt = "text_to_music_prompt_structurer.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["text_to_music_prompt_structurer*"]
+
+[tool.setuptools.package-data]
+text_to_music_prompt_structurer = ["vocab/*.json", "py.typed"]
