@@ -3,10 +3,10 @@ Suno Prompt Structurer - Main Engine
 """
 
 from pathlib import Path
-from suno_structurer.models import SunoPrompt
-from suno_structurer.loaders import VocabLoader
-from suno_structurer.registry import DetectorRegistry
-from suno_structurer.detectors import (
+from text_to_music_prompt_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.loaders import VocabLoader
+from text_to_music_prompt_structurer.registry import DetectorRegistry
+from text_to_music_prompt_structurer.detectors import (
     GenreDetector,
     KeywordListDetector,
     SingleKeywordDetector,

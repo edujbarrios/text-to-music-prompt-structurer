@@ -12,8 +12,8 @@ UNOFFICIAL TOOL - Not affiliated with Suno AI
 """
 
 import sys
-from suno_structurer.engine import SunoPromptEngine
-from suno_structurer.formatter import format_for_suno
+from text_to_music_prompt_structurer.engine import SunoPromptEngine
+from text_to_music_prompt_structurer.formatter import format_for_suno
 
 
 def main():
