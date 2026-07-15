@@ -54,7 +54,7 @@ Si quieres agregar una nueva categoría de detección:
            pass
    ```
 
-3. Regístralo en `text_to_music_prompt_structurer/engine.py` → `SunoPromptEngine.__init__`:
+3. Regístralo en `text_to_music_prompt_structurer/engine.py` → `MusicPromptEngine.__init__`:
    ```python
    self.registry.register(KeywordListDetector(
        loader.load("tu_categoria"), 
@@ -64,7 +64,7 @@ Si quieres agregar una nueva categoría de detección:
 
 ## Estándares de Código
 
-- Python 3.7+
+- Python 3.10+
 - Sigue PEP 8
 - Usa type hints cuando sea posible
 - Documenta funciones complejas
