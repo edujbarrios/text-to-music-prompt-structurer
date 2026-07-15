@@ -4,7 +4,7 @@ Text-to-Music Prompt Structurer - Main Engine
 
 from importlib import resources
 from pathlib import Path
-from text_to_music_prompt_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import MusicPrompt
 from text_to_music_prompt_structurer.loaders import VocabLoader
 from text_to_music_prompt_structurer.registry import DetectorRegistry
 from text_to_music_prompt_structurer.detectors import (
@@ -22,8 +22,8 @@ from text_to_music_prompt_structurer.detectors import (
 )
 
 
-class SunoPromptEngine:
-    """Main engine for processing unstructured text into Suno prompts."""
+class MusicPromptEngine:
+    """Process unstructured text into structured musical prompts."""
     
     def __init__(self, vocab_dir: str | Path | None = None):
         vocab_root = (
@@ -50,9 +50,13 @@ class SunoPromptEngine:
         self.registry.register(EraDetector(loader.load("era")))
         self.registry.register(ThemeDetector())
 
-    def process(self, text: str) -> SunoPrompt:
+    def process(self, text: str) -> MusicPrompt:
         """Process input text and return a structured prompt."""
         text = text.lower()
-        prompt = SunoPrompt()
+        prompt = MusicPrompt()
         self.registry.run(text, prompt)
         return prompt
+
+
+SunoPromptEngine = MusicPromptEngine
+"""Backward-compatible alias for :class:`MusicPromptEngine`."""
