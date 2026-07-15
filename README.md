@@ -1,4 +1,4 @@
-# Suno Prompt Structurer
+# Text-to-Music Prompt Structurer
 
 Convert unstructured musical ideas into structured [Suno AI](https://suno.ai) prompts.
 
@@ -38,8 +38,8 @@ INSTRUMENTS: Acoustic Guitar
 ## Installation
 
 ```bash
-git clone https://github.com/edujbarrios/suno-prompt-structurer.git
-cd suno-prompt-structurer
+git clone https://github.com/edujbarrios/text-to-music-prompt-structurer.git
+cd text-to-music-prompt-structurer
 python structurer.py "your musical idea here"
 ```
 
@@ -168,7 +168,7 @@ MIT License - See [LICENSE](LICENSE)
 **Eduardo J. Barrios**
 - Website: [edujbarrios.com](https://edujbarrios.com)
 - GitHub: [github.com/edujbarrios](https://github.com/edujbarrios)
-- Repository: [suno-prompt-structurer](https://github.com/edujbarrios/suno-prompt-structurer)
+- Repository: [text-to-music-prompt-structurer](https://github.com/edujbarrios/text-to-music-prompt-structurer)
 
 ---
 
