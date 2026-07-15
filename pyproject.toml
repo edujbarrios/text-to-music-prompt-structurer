@@ -7,7 +7,7 @@ name = "text-to-music-prompt-structurer"
 version = "0.1.0"
 description = "Turn free-form musical ideas into structured prompts for text-to-music workflows."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "MIT"
 authors = [
   { name = "Eduardo J. Barrios" },
@@ -18,7 +18,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -28,6 +27,14 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2",
+  "pytest>=8",
+  "ruff>=0.12",
+  "twine>=6",
+]
 
 [project.urls]
 Homepage = "https://github.com/edujbarrios/text-to-music-prompt-structurer"
@@ -44,3 +51,17 @@ include = ["text_to_music_prompt_structurer*"]
 
 [tool.setuptools.package-data]
 text_to_music_prompt_structurer = ["vocab/*.json", "py.typed"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.format]
+line-ending = "lf"
