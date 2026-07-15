@@ -57,3 +57,5 @@ class VocabLoader:
         text = re.sub(r",\s*([}\]])", r"\1", text)
 
         return json.loads(text)
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0

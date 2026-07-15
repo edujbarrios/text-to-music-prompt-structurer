@@ -46,3 +46,5 @@ def test_custom_vocabulary_directory_is_supported(tmp_path) -> None:
     prompt = MusicPromptEngine(vocab_dir=vocab_dir).process("custom genre")
 
     assert prompt.genre == "Custom Genre"
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0

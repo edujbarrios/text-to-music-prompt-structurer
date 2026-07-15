@@ -26,3 +26,5 @@ __all__ = [
 from text_to_music_prompt_structurer.engine import MusicPromptEngine, SunoPromptEngine
 from text_to_music_prompt_structurer.formatter import format_for_suno, format_prompt
 from text_to_music_prompt_structurer.models import MusicPrompt, SunoPrompt
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0
