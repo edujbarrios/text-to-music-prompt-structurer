@@ -6,19 +6,19 @@ Example: Using Text-to-Music Prompt Structurer as a Python Module
 This demonstrates how to use the tool programmatically in your own scripts.
 """
 
-from text_to_music_prompt_structurer import SunoPromptEngine, format_for_suno
+from text_to_music_prompt_structurer import MusicPromptEngine, format_prompt
 
 
 def main():
     # Create the engine
-    engine = SunoPromptEngine()
+    engine = MusicPromptEngine()
 
     # Example 1: Basic usage
     print("=" * 50)
     print("Example 1: Indie Pop")
     print("=" * 50)
     prompt1 = engine.process("indie pop with acoustic guitar, sad and nostalgic, 120 bpm")
-    print(format_for_suno(prompt1))
+    print(format_prompt(prompt1))
 
     # Example 2: Access structured data
     print("\n" + "=" * 50)
@@ -37,7 +37,7 @@ def main():
     prompt3 = engine.process(
         "latin trap 90 bpm with 808 and hi-hats, dark mood, male vocals in spanish"
     )
-    print(format_for_suno(prompt3))
+    print(format_prompt(prompt3))
 
     # Example 4: Check BPM detection
     print("\n" + "=" * 50)

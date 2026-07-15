@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from importlib.metadata import version
+
+import text_to_music_prompt_structurer
 from text_to_music_prompt_structurer import (
     MusicPrompt,
     MusicPromptEngine,
@@ -32,6 +35,10 @@ def test_suno_names_remain_compatible() -> None:
     assert SunoPromptEngine is MusicPromptEngine
     prompt = SunoPromptEngine().process("dreamy jazz")
     assert format_for_suno(prompt) == format_prompt(prompt)
+
+
+def test_runtime_version_matches_distribution_metadata() -> None:
+    assert text_to_music_prompt_structurer.__version__ == version("text-to-music-prompt-structurer")
 
 
 def test_cli_prints_formatted_prompt(capsys) -> None:
