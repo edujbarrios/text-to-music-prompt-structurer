@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Detection Strategies
+Text-to-Music Prompt Structurer - Detection Strategies
 """
 
 import re

@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Output Formatter
+Text-to-Music Prompt Structurer - Output Formatter
 """
 
 from text_to_music_prompt_structurer.models import SunoPrompt

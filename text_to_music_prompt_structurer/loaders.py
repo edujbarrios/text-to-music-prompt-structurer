@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Configuration Loader
+Text-to-Music Prompt Structurer - Configuration Loader
 """
 
 import json

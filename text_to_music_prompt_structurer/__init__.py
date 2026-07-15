@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Package Initialization
+Text-to-Music Prompt Structurer - Package Initialization
 Unstructured text → Structured Suno AI prompt
 
 Author: Eduardo J. Barrios

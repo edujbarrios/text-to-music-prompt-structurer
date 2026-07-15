@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Strategy Registry
+Text-to-Music Prompt Structurer - Strategy Registry
 """
 
 from text_to_music_prompt_structurer.models import SunoPrompt
