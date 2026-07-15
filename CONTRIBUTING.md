@@ -1,6 +1,6 @@
-# Contributing to Suno Prompt Structurer
+# Contributing to Text-to-Music Prompt Structurer
 
-Thanks for you interest in contributing to the Suno Prompt Structurer project!
+Thanks for your interest in contributing to the Text-to-Music Prompt Structurer project!
 
 **Developed by [Eduardo J. Barrios](https://edujbarrios.com)**
 
