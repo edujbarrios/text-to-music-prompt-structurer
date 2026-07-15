@@ -2,6 +2,7 @@
 Text-to-Music Prompt Structurer - Main Engine
 """
 
+from importlib import resources
 from pathlib import Path
 from text_to_music_prompt_structurer.models import SunoPrompt
 from text_to_music_prompt_structurer.loaders import VocabLoader
@@ -24,8 +25,13 @@ from text_to_music_prompt_structurer.detectors import (
 class SunoPromptEngine:
     """Main engine for processing unstructured text into Suno prompts."""
     
-    def __init__(self, vocab_dir="vocab"):
-        loader = VocabLoader(Path(vocab_dir))
+    def __init__(self, vocab_dir: str | Path | None = None):
+        vocab_root = (
+            resources.files("text_to_music_prompt_structurer").joinpath("vocab")
+            if vocab_dir is None
+            else Path(vocab_dir)
+        )
+        loader = VocabLoader(vocab_root)
         self.registry = DetectorRegistry()
 
         # Register all detectors
