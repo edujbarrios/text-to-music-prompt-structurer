@@ -5,8 +5,8 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 
-from text_to_music_prompt_structurer.engine import SunoPromptEngine
-from text_to_music_prompt_structurer.formatter import format_for_suno
+from text_to_music_prompt_structurer.engine import MusicPromptEngine
+from text_to_music_prompt_structurer.formatter import format_prompt
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -22,7 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the command-line interface."""
     args = build_parser().parse_args(argv)
-    prompt = SunoPromptEngine().process(" ".join(args.description))
-    print(format_for_suno(prompt))
+    prompt = MusicPromptEngine().process(" ".join(args.description))
+    print(format_prompt(prompt))
     return 0
 
