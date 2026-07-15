@@ -30,3 +30,5 @@ class MusicPrompt:
 
 SunoPrompt = MusicPrompt
 """Backward-compatible alias for :class:`MusicPrompt`."""
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0

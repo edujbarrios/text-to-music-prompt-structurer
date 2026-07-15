@@ -8,6 +8,7 @@ authors:
     given-names: "Eduardo J."
 version: "0.1.0"
 date-released: "2026-07-15"
+license: "MPL-2.0"
 repository-code: "https://github.com/edujbarrios/text-to-music-prompt-structurer"
 repository-artifact: "https://pypi.org/project/text-to-music-prompt-structurer/"
 url: "https://github.com/edujbarrios/text-to-music-prompt-structurer"

@@ -19,3 +19,5 @@ class DetectorRegistry:
         """Run all registered detectors on the input text."""
         for detector in self.detectors:
             detector.detect(text, prompt)
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0

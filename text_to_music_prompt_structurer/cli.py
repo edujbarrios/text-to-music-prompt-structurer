@@ -25,3 +25,5 @@ def main(argv: Sequence[str] | None = None) -> int:
     prompt = MusicPromptEngine().process(" ".join(args.description))
     print(format_prompt(prompt))
     return 0
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0
