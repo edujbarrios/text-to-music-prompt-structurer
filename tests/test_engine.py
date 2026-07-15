@@ -5,6 +5,8 @@ from __future__ import annotations
 import shutil
 from importlib import resources
 
+import pytest
+
 from text_to_music_prompt_structurer import MusicPromptEngine
 
 
@@ -28,6 +30,39 @@ def test_bundled_vocabularies_load_outside_project_directory(tmp_path, monkeypat
     assert prompt.genre == "Jazz"
     assert prompt.mood == ["Dark"]
     assert prompt.bpm == 90
+
+
+@pytest.mark.parametrize(
+    ("description", "genre", "subgenre"),
+    [
+        ("hypnotic techno with a pulsing bassline", "Electronic", "Hypnotic Techno"),
+        ("a hazy future garage track", "Electronic", "Future Garage"),
+        ("aggressive jersey drill", "Hip-Hop", "Jersey Drill"),
+        ("lush quiet storm ballad", "R&B", "Quiet Storm"),
+        ("atmospheric black metal with tremolo guitars", "Metal", "Atmospheric Black Metal"),
+        ("meditative spiritual jazz", "Jazz", "Spiritual Jazz"),
+        ("strict renaissance counterpoint", "Classical", "Renaissance"),
+        ("rustic appalachian folk", "Folk", "Appalachian Folk"),
+        ("brassy regional mexican celebration", "Latin", "Regional Mexican"),
+        ("fast baile funk for a street party", "Latin", "Baile Funk"),
+        ("minimal south african gqom", "African", "Gqom"),
+        ("ceremonial japanese gagaku", "Japanese", "Gagaku"),
+    ],
+)
+def test_engine_recognizes_expanded_genre_vocabulary(
+    description: str, genre: str, subgenre: str
+) -> None:
+    prompt = MusicPromptEngine().process(description)
+
+    assert prompt.genre == genre
+    assert prompt.subgenre == subgenre
+
+
+def test_genre_detection_does_not_match_inside_words() -> None:
+    prompt = MusicPromptEngine().process("popular and emotional songwriting")
+
+    assert prompt.genre is None
+    assert prompt.subgenre is None
 
 
 def test_custom_vocabulary_directory_is_supported(tmp_path) -> None:

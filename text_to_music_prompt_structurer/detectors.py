@@ -24,7 +24,7 @@ class GenreDetector(Detector):
 
     def detect(self, text, prompt):
         for key, val in self.genres.items():
-            if key in text:
+            if re.search(rf"(?<!\w){re.escape(key)}(?!\w)", text):
                 prompt.genre = val["genre"]
                 prompt.subgenre = val["subgenre"]
                 return
