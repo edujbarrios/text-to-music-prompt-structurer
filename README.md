@@ -47,7 +47,26 @@ prompt = MusicPromptEngine().process(
 print(format_prompt(prompt))
 ```
 
-The returned `MusicPrompt` object provides structured fields including `genre`, `subgenre`, `mood`, `bpm`, `tempo`, `key`, `instruments`, `production`, `language`, `voice_type`, `vocal_tone`, and `vocal_style`.
+Output:
+
+```text
+STYLE: Synthwave
+MOOD: Dark, Dreamy
+INSTRUMENTS: 808 Bass
+PRODUCTION: Dark tone
+VOCALS:
+  LANGUAGE: English
+  VOICE TYPE: Female Lead
+  TONE: Dark
+```
+
+`process()` returns a `MusicPrompt` object, so applications can use each detected value directly instead of parsing the formatted text. Its fields cover:
+
+- Musical direction: `genre`, `subgenre`, `mood`, `energy`, `tempo`, `bpm`, and `key`.
+- Arrangement and sound: `instruments`, `production`, `rhythm`, `structure`, and `era`.
+- Vocal direction: `language`, `voice_type`, `vocal_tone`, and `vocal_style`.
+
+`format_prompt()` renders only the detected fields as a ready-to-use structured prompt.
 
 ## Development
 
