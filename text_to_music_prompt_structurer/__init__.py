@@ -11,9 +11,16 @@ UNOFFICIAL TOOL - Not affiliated with Suno AI
 
 __version__ = "0.1.0"
 __author__ = "Eduardo J. Barrios"
-__all__ = ["SunoPrompt", "SunoPromptEngine", "format_for_suno"]
+__all__ = [
+    "MusicPrompt",
+    "MusicPromptEngine",
+    "format_prompt",
+    "SunoPrompt",
+    "SunoPromptEngine",
+    "format_for_suno",
+]
 
 # Core imports for package access
-from text_to_music_prompt_structurer.models import SunoPrompt
-from text_to_music_prompt_structurer.engine import SunoPromptEngine
-from text_to_music_prompt_structurer.formatter import format_for_suno
+from text_to_music_prompt_structurer.models import MusicPrompt, SunoPrompt
+from text_to_music_prompt_structurer.engine import MusicPromptEngine, SunoPromptEngine
+from text_to_music_prompt_structurer.formatter import format_for_suno, format_prompt

@@ -7,8 +7,8 @@ from typing import List, Optional
 
 
 @dataclass
-class SunoPrompt:
-    """Domain model representing a structured Suno AI prompt."""
+class MusicPrompt:
+    """Structured musical prompt produced by the detection engine."""
     genre: Optional[str] = None
     subgenre: Optional[str] = None
     mood: List[str] = field(default_factory=list)
@@ -26,3 +26,7 @@ class SunoPrompt:
     era: Optional[str] = None
     theme: Optional[str] = None
     notes: List[str] = field(default_factory=list)
+
+
+SunoPrompt = MusicPrompt
+"""Backward-compatible alias for :class:`MusicPrompt`."""
