@@ -61,22 +61,22 @@ LANGUAGE: Spanish
 Use the engine and built-in formatter directly:
 
 ```python
-from text_to_music_prompt_structurer import SunoPromptEngine, format_for_suno
+from text_to_music_prompt_structurer import MusicPromptEngine, format_prompt
 
-engine = SunoPromptEngine()
+engine = MusicPromptEngine()
 prompt = engine.process("synthwave with 808, dark and dreamy, female vocals in English")
 
-print(format_for_suno(prompt))
+print(format_prompt(prompt))
 ```
 
 ### Structured data
 
-The engine returns a `SunoPrompt` model whose fields can be consumed by another formatter, interface, or text-to-music integration:
+The engine returns a `MusicPrompt` model whose fields can be consumed by another formatter, interface, or text-to-music integration:
 
 ```python
-from text_to_music_prompt_structurer import SunoPromptEngine
+from text_to_music_prompt_structurer import MusicPromptEngine
 
-prompt = SunoPromptEngine().process(
+prompt = MusicPromptEngine().process(
     "jazz in c# minor with saxophone and piano, smooth and mysterious"
 )
 
@@ -96,6 +96,8 @@ Available fields include:
 - `production`
 - `vocals`
 - `language`
+
+The earlier `SunoPrompt`, `SunoPromptEngine`, and `format_for_suno` names remain available as compatibility aliases. New integrations should prefer the neutral API shown above.
 
 ## How it works
 

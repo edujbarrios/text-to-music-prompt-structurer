@@ -2,11 +2,11 @@
 Text-to-Music Prompt Structurer - Output Formatter
 """
 
-from text_to_music_prompt_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import MusicPrompt
 
 
-def format_for_suno(p: SunoPrompt) -> str:
-    """Format a SunoPrompt object into a readable string."""
+def format_prompt(p: MusicPrompt) -> str:
+    """Format a music prompt as compact, labeled text."""
     lines = []
 
     if p.genre:
@@ -44,3 +44,8 @@ def format_for_suno(p: SunoPrompt) -> str:
         lines.append(f"THEME: {p.theme}")
 
     return "\n".join(lines)
+
+
+def format_for_suno(prompt: MusicPrompt) -> str:
+    """Format a prompt using the Suno-compatible text representation."""
+    return format_prompt(prompt)
