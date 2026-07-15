@@ -9,7 +9,7 @@ GitHub: https://github.com/edujbarrios
 UNOFFICIAL TOOL - Not affiliated with Suno AI
 """
 
-__version__ = "1.0.0"
+__version__ = "0.1.0"
 __author__ = "Eduardo J. Barrios"
 __all__ = ["SunoPrompt", "SunoPromptEngine", "format_for_suno"]
 
