@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Suno Prompt Structurer
+Text-to-Music Prompt Structurer
 Convert unstructured musical ideas into structured Suno AI prompts
 
 Author: Eduardo J. Barrios
@@ -12,16 +12,16 @@ UNOFFICIAL TOOL - Not affiliated with Suno AI
 """
 
 import sys
-from suno_structurer.engine import SunoPromptEngine
-from suno_structurer.formatter import format_for_suno
+from text_to_music_prompt_structurer.engine import SunoPromptEngine
+from text_to_music_prompt_structurer.formatter import format_for_suno
 
 
 def main():
     """Main entry point for the CLI."""
     if len(sys.argv) < 2:
-        print("Usage: python suno.py \"your musical idea here\"")
+        print("Usage: python structurer.py \"your musical idea here\"")
         print("\nExample:")
-        print('  python suno.py "indie pop with acoustic guitar, sad and nostalgic, 120 bpm"')
+        print('  python structurer.py "indie pop with acoustic guitar, sad and nostalgic, 120 bpm"')
         sys.exit(1)
     
     # Process the input

@@ -1,8 +1,8 @@
 """
-Suno Prompt Structurer - Output Formatter
+Text-to-Music Prompt Structurer - Output Formatter
 """
 
-from suno_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import SunoPrompt
 
 
 def format_for_suno(p: SunoPrompt) -> str:

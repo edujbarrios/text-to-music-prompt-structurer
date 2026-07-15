@@ -1,4 +1,4 @@
-# Suno Prompt Structurer
+# Text-to-Music Prompt Structurer
 
 Convert unstructured musical ideas into structured [Suno AI](https://suno.ai) prompts.
 
@@ -38,8 +38,8 @@ INSTRUMENTS: Acoustic Guitar
 ## Installation
 
 ```bash
-git clone https://github.com/edujbarrios/suno-prompt-structurer.git
-cd suno-prompt-structurer
+git clone https://github.com/edujbarrios/text-to-music-prompt-structurer.git
+cd text-to-music-prompt-structurer
 python structurer.py "your musical idea here"
 ```
 
@@ -58,7 +58,7 @@ python structurer.py "your musical idea here"
 ### Python Module
 
 ```python
-from suno_structurer import SunoPromptEngine, format_for_suno
+from text_to_music_prompt_structurer import SunoPromptEngine, format_for_suno
 
 engine = SunoPromptEngine()
 prompt = engine.process("indie pop with acoustic guitar, sad, 120 bpm")
@@ -76,7 +76,7 @@ INSTRUMENTS: Acoustic Guitar
 ### Programmatic Access
 
 ```python
-from suno_structurer import SunoPromptEngine
+from text_to_music_prompt_structurer import SunoPromptEngine
 
 engine = SunoPromptEngine()
 prompt = engine.process("synthwave with 808, dark and dreamy")
@@ -168,7 +168,7 @@ MIT License - See [LICENSE](LICENSE)
 **Eduardo J. Barrios**
 - Website: [edujbarrios.com](https://edujbarrios.com)
 - GitHub: [github.com/edujbarrios](https://github.com/edujbarrios)
-- Repository: [suno-prompt-structurer](https://github.com/edujbarrios/suno-prompt-structurer)
+- Repository: [text-to-music-prompt-structurer](https://github.com/edujbarrios/text-to-music-prompt-structurer)
 
 ---
 
