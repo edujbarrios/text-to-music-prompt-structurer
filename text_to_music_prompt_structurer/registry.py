@@ -7,7 +7,7 @@ from text_to_music_prompt_structurer.models import SunoPrompt
 
 class DetectorRegistry:
     """Registry for detector strategies."""
-    
+
     def __init__(self):
         self.detectors = []
 

@@ -4,27 +4,28 @@ Text-to-Music Prompt Structurer - Main Engine
 
 from importlib import resources
 from pathlib import Path
-from text_to_music_prompt_structurer.models import MusicPrompt
-from text_to_music_prompt_structurer.loaders import VocabLoader
-from text_to_music_prompt_structurer.registry import DetectorRegistry
+
 from text_to_music_prompt_structurer.detectors import (
-    GenreDetector,
-    KeywordListDetector,
-    SingleKeywordDetector,
-    LanguageDetector,
     BPMDetector,
-    ThemeDetector,
-    KeyDetector,
     EnergyDetector,
-    StructureDetector,
-    RhythmDetector,
     EraDetector,
+    GenreDetector,
+    KeyDetector,
+    KeywordListDetector,
+    LanguageDetector,
+    RhythmDetector,
+    SingleKeywordDetector,
+    StructureDetector,
+    ThemeDetector,
 )
+from text_to_music_prompt_structurer.loaders import VocabLoader
+from text_to_music_prompt_structurer.models import MusicPrompt
+from text_to_music_prompt_structurer.registry import DetectorRegistry
 
 
 class MusicPromptEngine:
     """Process unstructured text into structured musical prompts."""
-    
+
     def __init__(self, vocab_dir: str | Path | None = None):
         vocab_root = (
             resources.files("text_to_music_prompt_structurer").joinpath("vocab")

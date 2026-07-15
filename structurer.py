@@ -13,6 +13,5 @@ UNOFFICIAL TOOL - Not affiliated with Suno AI
 
 from text_to_music_prompt_structurer.cli import main
 
-
 if __name__ == "__main__":
     raise SystemExit(main())
