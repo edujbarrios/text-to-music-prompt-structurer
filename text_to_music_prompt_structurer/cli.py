@@ -25,4 +25,3 @@ def main(argv: Sequence[str] | None = None) -> int:
     prompt = MusicPromptEngine().process(" ".join(args.description))
     print(format_prompt(prompt))
     return 0
-
