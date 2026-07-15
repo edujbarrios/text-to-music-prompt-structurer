@@ -2,7 +2,7 @@
 Text-to-Music Prompt Structurer - Strategy Registry
 """
 
-from text_to_music_prompt_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import MusicPrompt
 
 
 class DetectorRegistry:
@@ -15,7 +15,7 @@ class DetectorRegistry:
         """Register a new detector."""
         self.detectors.append(detector)
 
-    def run(self, text: str, prompt: SunoPrompt):
+    def run(self, text: str, prompt: MusicPrompt):
         """Run all registered detectors on the input text."""
         for detector in self.detectors:
             detector.detect(text, prompt)

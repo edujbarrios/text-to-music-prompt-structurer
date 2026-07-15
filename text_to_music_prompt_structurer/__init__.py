@@ -9,7 +9,9 @@ GitHub: https://github.com/edujbarrios
 UNOFFICIAL TOOL - Not affiliated with Suno AI
 """
 
-__version__ = "0.1.0"
+from importlib.metadata import version
+
+__version__ = version("text-to-music-prompt-structurer")
 __author__ = "Eduardo J. Barrios"
 __all__ = [
     "MusicPrompt",
