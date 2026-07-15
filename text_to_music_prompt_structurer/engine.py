@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Main Engine
+Text-to-Music Prompt Structurer - Main Engine
 """
 
 from pathlib import Path

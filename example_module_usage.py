@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Example: Using Suno Prompt Structurer as a Python Module
+Example: Using Text-to-Music Prompt Structurer as a Python Module
 
 This demonstrates how to use the tool programmatically in your own scripts.
 """
