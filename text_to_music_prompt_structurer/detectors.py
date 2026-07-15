@@ -4,13 +4,13 @@ Text-to-Music Prompt Structurer - Detection Strategies
 
 import re
 
-from text_to_music_prompt_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import MusicPrompt
 
 
 class Detector:
     """Base class for all detectors."""
 
-    def detect(self, text: str, prompt: SunoPrompt):
+    def detect(self, text: str, prompt: MusicPrompt):
         raise NotImplementedError
 
 
