@@ -49,3 +49,5 @@ def test_cli_prints_formatted_prompt(capsys) -> None:
     assert "STYLE: Latin Trap" in output
     assert "BPM: ~90" in output
     assert "INSTRUMENTS: 808 Bass" in output
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0

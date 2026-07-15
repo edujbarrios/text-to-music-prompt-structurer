@@ -1,7 +1,7 @@
 # Text-to-Music Prompt Structurer
 
 [![PyPI](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/text-to-music-prompt-structurer/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/edujbarrios/text-to-music-prompt-structurer/blob/main/LICENSE)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-orange.svg?style=for-the-badge)](https://github.com/edujbarrios/text-to-music-prompt-structurer/blob/main/LICENSE)
 
 Turn free-form musical ideas into structured prompts for text-to-music workflows.
 
@@ -57,7 +57,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) to add vocabularies or detection strategi
 
 ## License
 
-[MIT](LICENSE) © Eduardo J. Barrios
+[Mozilla Public License 2.0](LICENSE) © 2026 Eduardo J. Barrios. See [NOTICE](NOTICE) for attribution details.
 
 > [!NOTE]
 > This is an unofficial tool and is not affiliated with, endorsed by, or connected to Suno AI.

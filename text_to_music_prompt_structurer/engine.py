@@ -61,3 +61,5 @@ class MusicPromptEngine:
 
 SunoPromptEngine = MusicPromptEngine
 """Backward-compatible alias for :class:`MusicPromptEngine`."""
+# SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
+# SPDX-License-Identifier: MPL-2.0
