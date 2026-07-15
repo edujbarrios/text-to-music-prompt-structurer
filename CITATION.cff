@@ -1,0 +1,18 @@
+cff-version: "1.2.0"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "Text-to-Music Prompt Structurer"
+abstract: "A Python package that turns free-form musical ideas into structured prompts for text-to-music workflows."
+authors:
+  - family-names: "Barrios"
+    given-names: "Eduardo J."
+version: "0.1.0"
+date-released: "2026-07-15"
+repository-code: "https://github.com/edujbarrios/text-to-music-prompt-structurer"
+repository-artifact: "https://pypi.org/project/text-to-music-prompt-structurer/"
+url: "https://github.com/edujbarrios/text-to-music-prompt-structurer"
+keywords:
+  - "music generation"
+  - "prompt engineering"
+  - "text-to-music"
+  - "Python"
