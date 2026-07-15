@@ -1,6 +1,6 @@
-# Contributing to Suno Prompt Structurer
+# Contributing to Text-to-Music Prompt Structurer
 
-Thanks for you interest in contributing to the Suno Prompt Structurer project!
+Thanks for your interest in contributing to the Text-to-Music Prompt Structurer project!
 
 **Developed by [Eduardo J. Barrios](https://edujbarrios.com)**
 
@@ -54,7 +54,7 @@ Si quieres agregar una nueva categoría de detección:
            pass
    ```
 
-3. Regístralo en `suno_structurer/engine.py` → `SunoPromptEngine.__init__`:
+3. Regístralo en `text_to_music_prompt_structurer/engine.py` → `SunoPromptEngine.__init__`:
    ```python
    self.registry.register(KeywordListDetector(
        loader.load("tu_categoria"), 

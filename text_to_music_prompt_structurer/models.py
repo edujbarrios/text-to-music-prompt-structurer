@@ -1,5 +1,5 @@
 """
-Suno Prompt Structurer - Domain Models
+Text-to-Music Prompt Structurer - Domain Models
 """
 
 from dataclasses import dataclass, field
