@@ -3,25 +3,24 @@ Text-to-Music Prompt Structurer - Detection Strategies
 """
 
 import re
+
 from text_to_music_prompt_structurer.models import SunoPrompt
 
 
 class Detector:
     """Base class for all detectors."""
-    
+
     def detect(self, text: str, prompt: SunoPrompt):
         raise NotImplementedError
 
 
 class GenreDetector(Detector):
     """Detects musical genres from text."""
-    
+
     def __init__(self, genres):
         # Sort by key length descending so specific subgenres are matched before
         # their parent genre keywords (e.g. "bebop" before "jazz").
-        self.genres = dict(
-            sorted(genres.items(), key=lambda x: len(x[0]), reverse=True)
-        )
+        self.genres = dict(sorted(genres.items(), key=lambda x: len(x[0]), reverse=True))
 
     def detect(self, text, prompt):
         for key, val in self.genres.items():
@@ -33,7 +32,7 @@ class GenreDetector(Detector):
 
 class KeywordListDetector(Detector):
     """Generic detector for keyword-based list attributes."""
-    
+
     def __init__(self, source, target_attr):
         self.source = source
         self.target_attr = target_attr
@@ -62,7 +61,7 @@ class SingleKeywordDetector(Detector):
 
 class LanguageDetector(Detector):
     """Detects language from text."""
-    
+
     def __init__(self, languages):
         self.languages = languages
 
@@ -75,7 +74,7 @@ class LanguageDetector(Detector):
 
 class BPMDetector(Detector):
     """Detects BPM (beats per minute) from text."""
-    
+
     def detect(self, text, prompt):
         m = re.search(r"(\d{2,3})\s*bpm", text)
         if m:
@@ -84,7 +83,7 @@ class BPMDetector(Detector):
 
 class ThemeDetector(Detector):
     """Detects song theme from text."""
-    
+
     def detect(self, text, prompt):
         m = re.search(r"about\s+(.+)", text)
         if m:
@@ -93,7 +92,7 @@ class ThemeDetector(Detector):
 
 class KeyDetector(Detector):
     """Detects musical key/tonality from text."""
-    
+
     def __init__(self, keys):
         self.keys = keys
 
@@ -101,7 +100,7 @@ class KeyDetector(Detector):
         # Sort keys by length (descending) to match longer patterns first
         # This prevents "c major" from being matched as just "c" if "c#" exists
         sorted_keys = sorted(self.keys.items(), key=lambda x: len(x[0]), reverse=True)
-        
+
         for key, val in sorted_keys:
             # Use word boundary matching for better accuracy
             if re.search(rf"\b{re.escape(key)}\b", text):
@@ -133,10 +132,7 @@ class StructureDetector(Detector):
     """Detects song-structure sections (intro, verse, chorus, …) from text."""
 
     def __init__(self, structure_vocab):
-        self.tokens = {
-            item["token"]: item["label"]
-            for item in structure_vocab.get("tokens", [])
-        }
+        self.tokens = {item["token"]: item["label"] for item in structure_vocab.get("tokens", [])}
 
     def detect(self, text, prompt):
         hits = []
