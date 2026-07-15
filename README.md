@@ -57,7 +57,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) to add vocabularies or detection strategi
 
 ## License
 
-[Mozilla Public License 2.0](LICENSE) © 2026 Eduardo J. Barrios. See [NOTICE](NOTICE) for attribution details.
+Copyright © 2026 Eduardo J. Barrios.
+
+This project is licensed under the [Mozilla Public License 2.0](LICENSE). MPL 2.0 is a file-level copyleft license: modifications to covered source files must remain available under MPL 2.0, while those files may be combined with code under other licenses. See [NOTICE](NOTICE) for attribution details.
 
 > [!NOTE]
 > This is an unofficial tool and is not affiliated with, endorsed by, or connected to Suno AI.
