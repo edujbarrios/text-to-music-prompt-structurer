@@ -30,12 +30,18 @@ def format_prompt(p: MusicPrompt) -> str:
         lines.append(f"INSTRUMENTS: {', '.join(p.instruments)}")
     if p.production:
         lines.append(f"PRODUCTION: {', '.join(p.production)}")
-    if p.vocal_style:
-        lines.append(f"VOCALS: {', '.join(p.vocal_style)}")
-    elif p.vocals:
-        lines.append(f"VOCALS: {p.vocals}")
-    if p.language:
-        lines.append(f"LANGUAGE: {p.language}")
+    if p.voice_type or p.vocal_tone or p.vocal_style or p.vocals or p.language:
+        lines.append("VOCALS:")
+        if p.language:
+            lines.append(f"  LANGUAGE: {p.language}")
+        if p.voice_type:
+            lines.append(f"  VOICE TYPE: {', '.join(p.voice_type)}")
+        if p.vocal_tone:
+            lines.append(f"  TONE: {', '.join(p.vocal_tone)}")
+        if p.vocal_style:
+            lines.append(f"  STYLE: {', '.join(p.vocal_style)}")
+        elif p.vocals:
+            lines.append(f"  STYLE: {p.vocals}")
     if p.era:
         lines.append(f"ERA: {p.era}")
     if p.structure:
