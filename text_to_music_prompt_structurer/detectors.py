@@ -3,7 +3,7 @@ Suno Prompt Structurer - Detection Strategies
 """
 
 import re
-from suno_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import SunoPrompt
 
 
 class Detector:

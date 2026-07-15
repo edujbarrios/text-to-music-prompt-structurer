@@ -2,7 +2,7 @@
 Suno Prompt Structurer - Strategy Registry
 """
 
-from suno_structurer.models import SunoPrompt
+from text_to_music_prompt_structurer.models import SunoPrompt
 
 
 class DetectorRegistry:

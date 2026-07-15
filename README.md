@@ -58,7 +58,7 @@ python structurer.py "your musical idea here"
 ### Python Module
 
 ```python
-from suno_structurer import SunoPromptEngine, format_for_suno
+from text_to_music_prompt_structurer import SunoPromptEngine, format_for_suno
 
 engine = SunoPromptEngine()
 prompt = engine.process("indie pop with acoustic guitar, sad, 120 bpm")
@@ -76,7 +76,7 @@ INSTRUMENTS: Acoustic Guitar
 ### Programmatic Access
 
 ```python
-from suno_structurer import SunoPromptEngine
+from text_to_music_prompt_structurer import SunoPromptEngine
 
 engine = SunoPromptEngine()
 prompt = engine.process("synthwave with 808, dark and dreamy")

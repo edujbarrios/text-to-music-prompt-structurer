@@ -6,7 +6,7 @@ Example: Using Suno Prompt Structurer as a Python Module
 This demonstrates how to use the tool programmatically in your own scripts.
 """
 
-from suno_structurer import SunoPromptEngine, format_for_suno
+from text_to_music_prompt_structurer import SunoPromptEngine, format_for_suno
 
 def main():
     # Create the engine
