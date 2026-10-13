@@ -11,26 +11,31 @@ The engine is deterministic, offline, dependency-free and compatible with Python
 It detects known musical characteristics from free-form text and preserves the original
 creative direction by default so unfamiliar arrangement details are not silently lost.
 
-> Unofficial project. Suno does not publish a strict metatag grammar, and
-> generated audio is probabilistic. These are *input conventions* and sensible
-> guidelines, not guaranteed commands or an official Suno API integration.
+> **Project vision.** This library is an effort to design a sophisticated,
+> extensible music-prompting system that works effectively with Suno. Its author,
+> **Eduardo J. Barrios**, brings advanced knowledge of **artificial intelligence
+> (AI), natural language processing (NLP), and large language models (LLMs)**
+> to the design of interpretable musical instructions, structured song sections,
+> constraint extraction, and iterative prompt improvement. The goal is to
+> make complex music prompting more systematic, expressive, and reusable.
 
 ## Install
 
 ```bash
-python -m pip install --upgrade "text-to-music-prompt-structurer>=0.2.0"
+python -m pip install --upgrade "text-to-music-prompt-structurer>=0.3.0"
 ```
 
-Version **0.2.0** introduces the Suno-specific output. Existing installs of 0.1.x
-still use the old analysis format; upgrade to use the examples below.
+Version **0.3.0** improves prompt quality with automatic Exclude extraction, contextual
+language recognition and optional preflight validation. The Suno Custom/Advanced
+output introduced in 0.2.0 remains available.
 
-If PyPI has not yet indexed v0.2.0, the GitHub release/tag also supports installation:
+If PyPI has not yet indexed v0.3.0, the GitHub release/tag also supports installation:
 
 ```bash
-python -m pip install "git+https://github.com/edujbarrios/text-to-music-prompt-structurer.git@v0.2.0"
+python -m pip install "git+https://github.com/edujbarrios/text-to-music-prompt-structurer.git@v0.3.0"
 ```
 
-This Git install requires Git to be available and uses the exact v0.2.0 tag.
+This Git install requires Git and uses the exact v0.3.0 tag.
 
 ## Get Suno-ready fields (default CLI output)
 
@@ -165,6 +170,10 @@ rejects nonempty lyric lines rather than generating a contradictory request.
 | `--instrumental` | Force Instrumental on |
 | `--style-notes TEXT` | Additional freeform style/arrangement instruction |
 | `--no-original` | Do not append the original creative description |
+| `--no-auto-exclude` | Disable automatic negative-constraint extraction |
+| `--check` | Display prompt-quality issues on stderr |
+| `--max-style-chars N` | Optional caller-defined style budget (with --check) |
+| `--max-lyrics-chars N` | Optional caller-defined lyrics budget (with --check) |
 | `--title TITLE` | Song title |
 
 Example JSON command:
@@ -173,6 +182,69 @@ Example JSON command:
 text-to-music-prompt --format json --title "Medianoche" \
   --exclude "autotune" "dreamy synthwave 110 bpm female vocals"
 ```
+
+## Prompt-quality features (v0.3.0)
+
+### Automatically extract negative musical constraints
+
+Explicit negatives such as `no drums`, `without autotune`, `avoid reverb`
+and `sin batería` populate Suno's **Exclude** field. The negated instrument
+is removed from *positive* keyword detection while your original description
+can still be included for creative context. The extractor uses a conservative,
+documented vocabulary and deliberately does not guess at open-ended negations.
+
+```python
+from text_to_music_prompt_structurer import MusicPromptEngine
+
+fields = MusicPromptEngine().process_suno(
+    "neo soul, warm piano, 92 bpm, no drums, without autotune",
+    preserve_description=False,
+)
+print(fields.exclude)         # Drums, Autotune
+print(fields.style_of_music)  # Neo Soul; Warm mood; 92 BPM; ...
+```
+
+Use `--no-auto-exclude` to disable extraction; explicit `--exclude` arguments
+are retained. Language detection is also context-aware: `Latin trap` does
+not automatically mean Latin-language vocals, and `Spanish guitar` on its
+own does not mean Spanish-language singing.
+
+### Validate without rewriting
+
+```python
+from text_to_music_prompt_structurer import validate_suno_prompt
+
+issues = validate_suno_prompt(
+    fields,
+    max_style_chars=1000,   # your own budget, not an official Suno limit
+    max_lyrics_chars=3000,
+)
+for issue in issues:
+    print(issue.severity, issue.code, issue.message)
+```
+
+This checks missing styles, empty or skeleton-only lyrics, conflicting
+instrumental/vocal controls and optionally caller-defined length budgets.
+It never rewrites existing lyrics, and returns machine-readable issue codes.
+
+From the CLI, use `--check` for diagnostics on **stderr** while retaining
+clean prompt output on stdout (including valid JSON):
+
+```bash
+text-to-music-prompt --format json --check \
+  --max-style-chars 1000 "cinematic neo soul without drums"
+```
+
+### Automated releases to GitHub and PyPI
+
+Publishing runs through `.github/workflows/release.yml` whenever the package
+version is updated in `pyproject.toml` on `main`. It tests, lints, builds and
+checks artifacts, then publishes to PyPI through GitHub Actions OIDC **Trusted
+Publishing**. A GitHub release with wheel and source distribution is also
+created. PyPI must first have a matching Trusted Publisher under the project's
+Publishing settings: owner `edujbarrios`, repository
+`text-to-music-prompt-structurer`, workflow `release.yml`, environment
+`pypi`. There is no need for a long-lived PyPI token.
 
 ## Outputs and migration
 
