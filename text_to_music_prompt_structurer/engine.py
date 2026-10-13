@@ -85,7 +85,7 @@ class MusicPromptEngine:
         Disable it to generate a shorter vocabulary-only style prompt.
         """
         negatives = extract_negative_constraints(text) if auto_exclude else None
-        prompt = self.process(negatives.cleaned_description if negatives else text)
+        prompt = self.process(negatives.detection_description if negatives else text)
         if instrumental is None:
             instrumental = bool(
                 re.search(
