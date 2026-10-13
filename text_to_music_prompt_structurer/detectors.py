@@ -141,17 +141,34 @@ class EnergyDetector(Detector):
 
 
 class StructureDetector(Detector):
-    """Detects song-structure sections (intro, verse, chorus, …) from text."""
+    """Detect sections in source order, preserving repeats and numbered verses."""
 
     def __init__(self, structure_vocab):
-        self.tokens = {item["token"]: item["label"] for item in structure_vocab.get("tokens", [])}
+        labels = {item["token"]: item["label"] for item in structure_vocab.get("tokens", [])}
+        labels["final chorus"] = "Final Chorus"
+        self.matchers = []
+        for token, label in labels.items():
+            pattern = rf"(?<!\\w){re.escape(token)}(?!\\w)"
+            if label in {"Verse", "Chorus", "Bridge", "Interlude", "Solo"}:
+                pattern += r"(?:\\s+([1-9][0-9]?))?"
+            self.matchers.append((re.compile(pattern), label))
 
     def detect(self, text, prompt):
         hits = []
-        for token, label in self.tokens.items():
-            if re.search(rf"\b{re.escape(token)}\b", text):
-                hits.append(label)
-        prompt.structure = list(dict.fromkeys(hits))
+        for pattern, label in self.matchers:
+            for match in pattern.finditer(text):
+                suffix = f" {match.group(1)}" if match.lastindex and match.group(1) else ""
+                hits.append((match.start(), match.end(), label + suffix))
+        # Longer matches at the same position take precedence:
+        # Pre-Chorus beats Chorus, Final Chorus beats Chorus, etc.
+        hits.sort(key=lambda item: (item[0], -(item[1] - item[0])))
+        chosen = []
+        last_end = -1
+        for start, end, label in hits:
+            if start >= last_end:
+                chosen.append(label)
+                last_end = end
+        prompt.structure = chosen
 
 
 class RhythmDetector(Detector):
