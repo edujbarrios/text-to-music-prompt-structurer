@@ -8,6 +8,7 @@
 just a generic analysis of genres and instruments.
 
 The engine is deterministic, offline, dependency-free and compatible with Python 3.10+.
+It is built using NLP-inspired parsing techniques and does not require a hosted LLM.
 It detects known musical characteristics from free-form text and preserves the original
 creative direction by default so unfamiliar arrangement details are not silently lost.
 
@@ -189,8 +190,8 @@ text-to-music-prompt --format json --title "Medianoche" \
 
 Explicit negatives such as `no drums`, `without autotune`, `avoid reverb`
 and `sin batería` populate Suno's **Exclude** field. The negated instrument
-is removed from *positive* keyword detection while your original description
-can still be included for creative context. The extractor uses a conservative,
+is removed from *positive* keyword detection and from the preserved creative
+summary so it does not contradict the Exclude field. The extractor uses a conservative,
 documented vocabulary and deliberately does not guess at open-ended negations.
 
 ```python
