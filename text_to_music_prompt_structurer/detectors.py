@@ -148,9 +148,9 @@ class StructureDetector(Detector):
         labels["final chorus"] = "Final Chorus"
         self.matchers = []
         for token, label in labels.items():
-            pattern = rf"(?<!\\w){re.escape(token)}(?!\\w)"
+            pattern = rf"(?<!\w){re.escape(token)}(?!\w)"
             if label in {"Verse", "Chorus", "Bridge", "Interlude", "Solo"}:
-                pattern += r"(?:\\s+([1-9][0-9]?))?"
+                pattern += r"(?:\s+([1-9][0-9]?))?"
             self.matchers.append((re.compile(pattern), label))
 
     def detect(self, text, prompt):
