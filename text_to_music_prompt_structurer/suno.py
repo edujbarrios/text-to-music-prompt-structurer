@@ -111,7 +111,9 @@ def _style_from_prompt(prompt: MusicPrompt, *, instrumental: bool, notes: str) -
     clauses: list[str] = []
 
     genre = prompt.subgenre or prompt.genre
-    if genre:
+    if len(prompt.genres) > 1:
+        clauses.append("Genre blend: " + " + ".join(prompt.genres))
+    elif genre:
         clauses.append(genre)
     if prompt.mood:
         clauses.append(f"{', '.join(_unique(prompt.mood))} mood")
