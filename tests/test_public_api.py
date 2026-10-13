@@ -51,7 +51,7 @@ def test_suno_names_remain_compatible() -> None:
     assert SunoPrompt is MusicPrompt
     assert SunoPromptEngine is MusicPromptEngine
     prompt = SunoPromptEngine().process("dreamy jazz")
-    assert format_for_suno(prompt) == format_prompt(prompt)
+    assert format_for_suno(prompt).startswith("STYLE OF MUSIC\nJazz; Dreamy mood")
 
 
 def test_runtime_version_matches_distribution_metadata() -> None:
@@ -59,7 +59,7 @@ def test_runtime_version_matches_distribution_metadata() -> None:
 
 
 def test_cli_prints_formatted_prompt(capsys) -> None:
-    exit_code = main(["latin", "trap", "90", "bpm", "with", "808"])
+    exit_code = main(["--format", "legacy", "latin", "trap", "90", "bpm", "with", "808"])
 
     assert exit_code == 0
     output = capsys.readouterr().out

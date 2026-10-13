@@ -2,6 +2,8 @@
 Text-to-Music Prompt Structurer - Main Engine
 """
 
+import re
+from collections.abc import Sequence
 from importlib import resources
 from pathlib import Path
 
@@ -22,6 +24,7 @@ from text_to_music_prompt_structurer.detectors import (
 from text_to_music_prompt_structurer.loaders import VocabLoader
 from text_to_music_prompt_structurer.models import MusicPrompt
 from text_to_music_prompt_structurer.registry import DetectorRegistry
+from text_to_music_prompt_structurer.suno import SunoFields, SunoSection, build_suno_prompt
 
 
 class MusicPromptEngine:
@@ -61,6 +64,49 @@ class MusicPromptEngine:
         self.registry.run(text, prompt)
         return prompt
 
+
+
+    def process_suno(
+        self,
+        text: str,
+        *,
+        title: str = "",
+        lyrics: str = "",
+        sections: Sequence[SunoSection | str] | None = None,
+        exclude: str | Sequence[str] = "",
+        instrumental: bool | None = None,
+        style_notes: str = "",
+        preserve_description: bool = True,
+    ) -> SunoFields:
+        """Build Suno's actual Custom/Advanced input fields from a description.
+
+        Preserving the source description by default retains production and
+        arrangement nuances that keyword detectors do not understand yet.
+        Disable it to generate a shorter vocabulary-only style prompt.
+        """
+        prompt = self.process(text)
+        if instrumental is None:
+            instrumental = bool(
+                re.search(
+                    r"\b(?:instrumental(?!\s+(?:break|section|solo))"
+                    r"|no vocals|without vocals|no singing|sin voz|sin voces|sin letra)\b",
+                    text,
+                    re.IGNORECASE,
+                )
+            )
+        notes = style_notes.strip()
+        if preserve_description and text.strip():
+            original = "Creative direction: " + text.strip()
+            notes = f"{notes}; {original}" if notes else original
+        return build_suno_prompt(
+            prompt,
+            title=title,
+            lyrics=lyrics,
+            sections=sections,
+            exclude=exclude,
+            instrumental=instrumental,
+            style_notes=notes,
+        )
 
 SunoPromptEngine = MusicPromptEngine
 """Backward-compatible alias for :class:`MusicPromptEngine`."""

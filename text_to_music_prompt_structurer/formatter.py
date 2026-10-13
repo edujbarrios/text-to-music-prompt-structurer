@@ -3,6 +3,11 @@ Text-to-Music Prompt Structurer - Output Formatter
 """
 
 from text_to_music_prompt_structurer.models import MusicPrompt
+from text_to_music_prompt_structurer.suno import (
+    SunoFields,
+    build_suno_prompt,
+    render_suno_prompt,
+)
 
 
 def format_prompt(p: MusicPrompt) -> str:
@@ -52,8 +57,12 @@ def format_prompt(p: MusicPrompt) -> str:
     return "\n".join(lines)
 
 
-def format_for_suno(prompt: MusicPrompt) -> str:
-    """Format a prompt using the Suno-compatible text representation."""
-    return format_prompt(prompt)
+def format_for_suno(prompt: MusicPrompt | SunoFields) -> str:
+    """Render separate Suno Custom/Advanced fields, not legacy analysis labels.
+
+    Accepts either the structured input MusicPrompt or already built SunoFields.
+    """
+    fields = build_suno_prompt(prompt) if isinstance(prompt, MusicPrompt) else prompt
+    return render_suno_prompt(fields)
 # SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
 # SPDX-License-Identifier: MPL-2.0

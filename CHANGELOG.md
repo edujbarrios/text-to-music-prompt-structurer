@@ -4,6 +4,25 @@ All notable changes to this project are documented here. The project follows [Se
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-13
+
+### Added
+
+- Suno Custom/Advanced field model with separate Style of Music, Lyrics, Exclude, Title, Instrumental, Vocal Gender and optional lyric brief.
+- Structured section labels with per-section lyric lines and performance cues.
+- Suno and JSON CLI modes, user-provided lyric files, exclusions and instrumentation toggles.
+- Preservation of the original creative direction when building Suno-facing prompts.
+- Documentation and contract tests based on official Suno creation guidance.
+
+### Changed
+
+- CLI defaults to paste-ready Suno fields; use `--format legacy` for previous labeled output.
+- `format_for_suno()` now renders Suno field values instead of the legacy analysis format.
+
+### Unchanged
+
+- `MusicPromptEngine.process()`, `format_prompt()` and Suno aliases preserve the existing API.
+
 ## [0.1.1] - 2026-07-15
 
 ### Added
@@ -31,7 +50,8 @@ All notable changes to this project are documented here. The project follows [Se
 - Bundled, extensible JSON vocabularies.
 - Typed-package marker, automated tests, linting, and cross-platform CI.
 
-[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/releases/tag/v0.1.0
 
