@@ -51,7 +51,7 @@ def test_suno_names_remain_compatible() -> None:
     assert SunoPrompt is MusicPrompt
     assert SunoPromptEngine is MusicPromptEngine
     prompt = SunoPromptEngine().process("dreamy jazz")
-    assert format_for_suno(prompt).startswith("STYLE OF MUSIC\\nJazz; Dreamy mood")
+    assert format_for_suno(prompt).startswith("STYLE OF MUSIC\nJazz; Dreamy mood")
 
 
 def test_runtime_version_matches_distribution_metadata() -> None:
