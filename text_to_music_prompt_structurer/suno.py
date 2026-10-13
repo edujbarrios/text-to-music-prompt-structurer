@@ -197,7 +197,7 @@ def build_suno_prompt(
 
     genders = {
         gender for gender in ("Male", "Female")
-        if any(re.search(rf"\\b{gender}\\b", value, re.IGNORECASE) for value in prompt.voice_type)
+        if any(re.search(rf"\b{gender}\b", value, re.IGNORECASE) for value in prompt.voice_type)
     }
     gender = next(iter(genders)) if len(genders) == 1 and not instrumental else None
     return SunoFields(
