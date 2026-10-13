@@ -41,8 +41,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--cue",
         action="append",
         default=[],
-        metavar="SECTION=DIRECTION",
-        help="non-sung bracketed direction for a named --section (repeatable)",
+        metavar="SECTION[#N]=DIRECTION",
+        help="non-sung cue for a section occurrence, e.g. Chorus#2=big drums",
     )
     parser.add_argument(
         "--exclude",
@@ -96,25 +96,49 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.lyrics_file and args.section:
         parser.error("--lyrics-file and --section cannot be used together")
 
-    cue_map = {}
+    # Bind cues to occurrences, not just names. Repeated Chorus sections can
+    # each have their own direction; #2 explicitly addresses occurrence two.
+    section_names = [name.strip() for name in (args.section or [])]
+    by_name: dict[str, list[int]] = {}
+    for index, name in enumerate(section_names):
+        by_name.setdefault(name.casefold(), []).append(index)
+    cues_by_index: dict[int, str] = {}
     for cue in args.cue:
-        name, separator, direction = cue.partition("=")
-        if not separator or not name.strip() or not direction.strip():
-            parser.error("--cue must be SECTION=DIRECTION")
-        cue_map[name.strip().lower()] = direction.strip()
-    if cue_map and not args.section:
-        parser.error("--cue requires at least one --section")
-
-    sections = None
-    if args.section:
-        sections = [
-            SunoSection(name, cue=cue_map.get(name.lower(), ""))
-            for name in args.section
+        raw_name, separator, direction = cue.partition("=")
+        name = raw_name.strip()
+        if not separator or not name or not direction.strip():
+            parser.error("--cue must be SECTION[#N]=DIRECTION")
+        if "#" in name:
+            name, _, ordinal = name.rpartition("#")
+            name = name.strip()
+            if not ordinal.isdigit() or int(ordinal) < 1:
+                parser.error("--cue occurrence must be a positive number")
+            occurrence = int(ordinal) - 1
+        else:
+            occurrence = None
+        positions = by_name.get(name.casefold(), [])
+        if not positions:
+            parser.error("--cue refers to missing --section: " + name)
+        if occurrence is not None:
+            if occurrence >= len(positions):
+                parser.error("--cue occurrence not found: " + raw_name)
+            target = positions[occurrence]
+        else:
+            remaining = [idx for idx in positions if idx not in cues_by_index]
+            if not remaining:
+                parser.error("--cue has more directions than section occurrences: " + name)
+            target = remaining[0]
+        if target in cues_by_index:
+            parser.error("--cue repeats direction for the same section: " + raw_name)
+        cues_by_index[target] = direction.strip()
+    sections = (
+        [
+            SunoSection(name, cue=cues_by_index.get(index, ""))
+            for index, name in enumerate(section_names)
         ]
-        unknown = set(cue_map) - {name.lower() for name in args.section}
-        if unknown:
-            parser.error("--cue refers to missing --section: " + ", ".join(sorted(unknown)))
-
+        if args.section
+        else None
+    )
     try:
         lyrics = args.lyrics_file.read_text(encoding="utf-8") if args.lyrics_file else ""
         fields = engine.process_suno(

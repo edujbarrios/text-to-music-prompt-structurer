@@ -28,6 +28,7 @@ class MusicPrompt:
     era: str | None = None
     theme: str | None = None
     notes: list[str] = field(default_factory=list)
+    genres: list[str] = field(default_factory=list)  # Ordered style blend
 
 
 SunoPrompt = MusicPrompt

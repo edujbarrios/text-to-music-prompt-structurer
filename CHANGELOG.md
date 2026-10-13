@@ -4,6 +4,27 @@ All notable changes to this project are documented here. The project follows [Se
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-13
+
+### Fixed
+
+- Do not turn per-section exclusions (e.g., "no drums in the intro") into global Exclude items.
+- Remove negated instruments from positive instrumentation detection while retaining local creative directions.
+- Prevent partial or out-of-range BPM matches for invalid numbers such as 1024, 2000, and decimal BPM.
+- Correct escaped-whitespace handling when cleaning creative descriptions.
+- Allow distinct CLI cues for repeated chorus/verse sections using ordered or `#N` occurrence addressing.
+- Recognize Spanish vocal instructions for voice type, tone and singing technique.
+
+### Added
+
+- Ordered, overlap-aware detection of multiple genre blends in `MusicPrompt.genres`.
+- Render complex genre blends into Suno's Style of Music field.
+- Regression tests for section-scoped constraints, tempo parsing, language, genre blending, and repeated cues.
+
+### Documentation
+
+- Replaced the long introduction with installation and quickstart instructions at the top of README.
+
 ## [0.3.0] - 2026-10-13
 
 ### Added
@@ -71,7 +92,8 @@ All notable changes to this project are documented here. The project follows [Se
 - Bundled, extensible JSON vocabularies.
 - Typed-package marker, automated tests, linting, and cross-platform CI.
 
-[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.0...v0.1.1

@@ -66,5 +66,15 @@
   "chopped vocals": "Chopped vocals",
   "filtered vocals": "Filtered vocals",
   "megaphone vocals": "Megaphone vocals",
-  "radio voice": "Radio voice effect"
+  "radio voice": "Radio voice effect",
+  "coros": "Backing vocals",
+  "armonías vocales": "Backing harmonies",
+  "armonias vocales": "Backing harmonies",
+  "susurrado": "Whispered delivery",
+  "susurrada": "Whispered delivery",
+  "susurros": "Whispered delivery",
+  "voz susurrada": "Whispered delivery",
+  "gritado": "Screamed vocals",
+  "gritada": "Screamed vocals",
+  "voz principal": "Lead vocals"
 }

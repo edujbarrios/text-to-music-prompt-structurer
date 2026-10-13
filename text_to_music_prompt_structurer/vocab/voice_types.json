@@ -32,5 +32,15 @@
   "tenor voice": "Tenor",
   "baritone": "Baritone",
   "bass vocals": "Bass",
-  "bass voice": "Bass"
+  "bass voice": "Bass",
+  "voz femenina": "Female Lead",
+  "voces femeninas": "Female Lead",
+  "cantante femenina": "Female Lead",
+  "voz masculina": "Male Lead",
+  "voces masculinas": "Male Lead",
+  "cantante masculino": "Male Lead",
+  "voz de mujer": "Female Lead",
+  "voz de hombre": "Male Lead",
+  "coro mixto": "Mixed Choir",
+  "dueto": "Duet"
 }
