@@ -47,6 +47,16 @@ def test_suno_exclude_masks_negative_instrument_from_positive_style() -> None:
     assert "Autotune" not in fields.style_of_music
 
 
+def test_negative_constraints_never_repeat_in_default_style() -> None:
+    fields = MusicPromptEngine().process_suno(
+        "neo soul with no drums, warm piano without autotune"
+    )
+    assert fields.exclude == "Drums, Autotune"
+    assert "no drums" not in fields.style_of_music.lower()
+    assert "without autotune" not in fields.style_of_music.lower()
+    assert "Creative direction:" in fields.style_of_music
+
+
 def test_explicit_excludes_are_deduplicated_without_losing_order() -> None:
     fields = MusicPromptEngine().process_suno(
         "neo soul with no drums, without autotune",
