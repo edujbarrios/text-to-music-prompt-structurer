@@ -24,6 +24,14 @@ python -m pip install --upgrade "text-to-music-prompt-structurer>=0.2.0"
 Version **0.2.0** introduces the Suno-specific output. Existing installs of 0.1.x
 still use the old analysis format; upgrade to use the examples below.
 
+If PyPI has not yet indexed v0.2.0, the GitHub release/tag also supports installation:
+
+```bash
+python -m pip install "git+https://github.com/edujbarrios/text-to-music-prompt-structurer.git@v0.2.0"
+```
+
+This Git install requires Git to be available and uses the exact v0.2.0 tag.
+
 ## Get Suno-ready fields (default CLI output)
 
 ```bash
