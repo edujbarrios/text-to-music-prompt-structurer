@@ -100,8 +100,8 @@ class MusicPromptEngine:
             # Keep nuanced, unknown creative details, but do NOT append
             # negated instruments back into the positive Style of Music field.
             creative = negatives.cleaned_description if negatives else text
-            creative = re.sub(r"\\s+([,;])", r"\\1", creative)
-            creative = re.sub(r"[,;]\\s*[,;]+", ",", creative).strip().strip(",;").strip()
+            creative = re.sub(r"\s+([,;])", r"\1", creative)
+            creative = re.sub(r"[,;]\s*[,;]+", ",", creative).strip().strip(",;").strip()
             if creative:
                 original = "Creative direction: " + creative
                 notes = f"{notes}; {original}" if notes else original
