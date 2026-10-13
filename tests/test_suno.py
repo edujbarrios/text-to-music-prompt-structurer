@@ -150,5 +150,22 @@ def test_cli_section_cue(capsys) -> None:
     assert "LYRICS\n[Verse 1]\n[whispered]\n\n[Chorus]" in out
 
 
+def test_ordered_structure_preserves_repeats_and_numbered_sections() -> None:
+    prompt = MusicPromptEngine().process(
+        "song structure: intro, verse 1, pre-chorus, chorus, verse 2, "
+        "chorus, bridge, final chorus, outro"
+    )
+    assert prompt.structure == [
+        "Intro", "Verse 1", "Pre-Chorus", "Chorus", "Verse 2",
+        "Chorus", "Bridge", "Final Chorus", "Outro",
+    ]
+    fields = build_suno_prompt(prompt)
+    assert fields.lyrics == (
+        "[Intro]\n\n[Verse 1]\n\n[Pre-Chorus]\n\n"
+        "[Chorus]\n\n[Verse 2]\n\n[Chorus]\n\n"
+        "[Bridge]\n\n[Final Chorus]\n\n[Outro]"
+    )
+
+
 # SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
 # SPDX-License-Identifier: MPL-2.0
