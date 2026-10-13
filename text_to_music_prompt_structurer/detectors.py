@@ -72,16 +72,49 @@ class SingleKeywordDetector(Detector):
 
 
 class LanguageDetector(Detector):
-    """Detects language from text."""
+    """Detect singing language from bounded, contextual phrases.
+
+    A genre such as "Latin trap" should not become Latin-language singing;
+    "Spanish guitar" should not become Spanish vocals by itself.
+    """
+
+    _vocal_context = re.compile(
+        r"\b(?:vocals?|voice|singer|singing|sung|lyrics?|voices|"
+        r"voz|voces|cantado|cantada|cantante|letra)\b"
+    )
+    _non_vocal_instrument = re.compile(
+        r"^(?:guitar|horn|piano|bass|drums?|violin|strings?|trumpet)\b"
+    )
 
     def __init__(self, languages):
-        self.languages = languages
+        self.languages = dict(
+            sorted(languages.items(), key=lambda item: len(item[0]), reverse=True)
+        )
 
     def detect(self, text, prompt):
+        has_vocals = bool(self._vocal_context.search(text))
         for key, val in self.languages.items():
-            if key in text:
+            token = rf"(?<!\w){re.escape(key)}(?!\w)"
+            # Explicit language instructions have priority over genre mentions.
+            explicit = (
+                rf"\b(?:in|en|sung\s+in|cantado\s+en|lyrics\s+in|letra\s+en)\s+{token}"
+                rf"|{token}\s+(?:vocals?|lyrics?|voice|letra|voz|voces)"
+            )
+            if re.search(explicit, text):
                 prompt.language = val
                 return
+            if key == "latin" or not has_vocals:
+                continue
+            for match in re.finditer(token, text):
+                following = text[match.end():].lstrip()
+                if self._non_vocal_instrument.match(following):
+                    continue
+                # Vocal context must be reasonably close, not a distant
+                # reference elsewhere in a long free-form description.
+                nearby = text[max(0, match.start() - 35):match.end() + 35]
+                if self._vocal_context.search(nearby):
+                    prompt.language = val
+                    return
 
 
 class BPMDetector(Detector):
