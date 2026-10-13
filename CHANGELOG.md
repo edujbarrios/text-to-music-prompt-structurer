@@ -4,7 +4,7 @@ All notable changes to this project are documented here. The project follows [Se
 
 ## [Unreleased]
 
-## [0.2.0] - Unreleased
+## [0.2.0] - 2026-10-13
 
 ### Added
 
