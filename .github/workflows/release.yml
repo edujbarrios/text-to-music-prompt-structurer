@@ -6,7 +6,7 @@ name: Publish distributions
 on:
   push:
     branches: [main]
-    paths: [pyproject.toml]
+    paths: [pyproject.toml, .github/workflows/release.yml]
   release:
     types: [published]
   workflow_dispatch:
@@ -125,14 +125,11 @@ jobs:
 
   github-release:
     name: Create GitHub version and release
+    # GitHub distributions remain downloadable even when PyPI authentication
+    # has not been configured. The PyPI job still reports its own status.
     # A release created with GITHUB_TOKEN won't re-trigger release workflows.
-    if: >-
-      always() && github.event_name == 'push'
-      && needs.build.result == 'success'
-      && (needs.publish-pypi.result == 'success'
-          || (needs.publish-pypi.result == 'skipped'
-              && needs.build.outputs.pypi_exists == 'true'))
-    needs: [build, publish-pypi]
+    if: github.event_name == 'push' && needs.build.result == 'success'
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
