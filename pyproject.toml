@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "text-to-music-prompt-structurer"
-version = "0.2.0"
-description = "Turn musical ideas into structured Suno Custom/Advanced fields and lyrics."
+version = "0.3.0"
+description = "Create and validate structured Suno prompts with NLP-inspired music parsing."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MPL-2.0"

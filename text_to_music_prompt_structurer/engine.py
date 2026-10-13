@@ -21,6 +21,7 @@ from text_to_music_prompt_structurer.detectors import (
     ThemeDetector,
     VocalAttributeDetector,
 )
+from text_to_music_prompt_structurer.exclusions import extract_negative_constraints
 from text_to_music_prompt_structurer.loaders import VocabLoader
 from text_to_music_prompt_structurer.models import MusicPrompt
 from text_to_music_prompt_structurer.registry import DetectorRegistry
@@ -64,8 +65,6 @@ class MusicPromptEngine:
         self.registry.run(text, prompt)
         return prompt
 
-
-
     def process_suno(
         self,
         text: str,
@@ -77,6 +76,7 @@ class MusicPromptEngine:
         instrumental: bool | None = None,
         style_notes: str = "",
         preserve_description: bool = True,
+        auto_exclude: bool = True,
     ) -> SunoFields:
         """Build Suno's actual Custom/Advanced input fields from a description.
 
@@ -84,7 +84,8 @@ class MusicPromptEngine:
         arrangement nuances that keyword detectors do not understand yet.
         Disable it to generate a shorter vocabulary-only style prompt.
         """
-        prompt = self.process(text)
+        negatives = extract_negative_constraints(text) if auto_exclude else None
+        prompt = self.process(negatives.cleaned_description if negatives else text)
         if instrumental is None:
             instrumental = bool(
                 re.search(
@@ -95,18 +96,38 @@ class MusicPromptEngine:
                 )
             )
         notes = style_notes.strip()
-        if preserve_description and text.strip():
-            original = "Creative direction: " + text.strip()
-            notes = f"{notes}; {original}" if notes else original
+        if preserve_description:
+            # Keep nuanced, unknown creative details, but do NOT append
+            # negated instruments back into the positive Style of Music field.
+            creative = negatives.cleaned_description if negatives else text
+            creative = re.sub(r"\\s+([,;])", r"\\1", creative)
+            creative = re.sub(r"[,;]\\s*[,;]+", ",", creative).strip().strip(",;").strip()
+            if creative:
+                original = "Creative direction: " + creative
+                notes = f"{notes}; {original}" if notes else original
+        explicit = (
+            [item.strip() for item in exclude.split(",") if item.strip()]
+            if isinstance(exclude, str)
+            else list(exclude)
+        )
+        auto = list(negatives.excludes) if negatives else []
+        combined_exclude: list[str] = []
+        seen_exclusions: set[str] = set()
+        for value in [*explicit, *auto]:
+            item = value.strip()
+            if item and item.casefold() not in seen_exclusions:
+                combined_exclude.append(item)
+                seen_exclusions.add(item.casefold())
         return build_suno_prompt(
             prompt,
             title=title,
             lyrics=lyrics,
             sections=sections,
-            exclude=exclude,
+            exclude=combined_exclude,
             instrumental=instrumental,
             style_notes=notes,
         )
+
 
 SunoPromptEngine = MusicPromptEngine
 """Backward-compatible alias for :class:`MusicPromptEngine`."""

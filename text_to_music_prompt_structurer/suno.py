@@ -236,5 +236,86 @@ def render_suno_prompt(fields: SunoFields) -> str:
     return "\n\n".join(parts)
 
 
+@dataclass(frozen=True)
+class PromptIssue:
+    """Non-destructive validation finding for a Suno prompt."""
+
+    code: str
+    message: str
+    severity: str = "warning"
+
+
+def validate_suno_prompt(
+    fields: SunoFields,
+    *,
+    max_style_chars: int | None = None,
+    max_lyrics_chars: int | None = None,
+) -> list[PromptIssue]:
+    """Preflight a prompt without modifying any user-authored text.
+
+    Character limits are *caller-chosen budgets*, not claimed Suno limits.
+    Warnings cover potentially surprising instructions, not model guarantees.
+    """
+    for name, limit in (
+        ("max_style_chars", max_style_chars),
+        ("max_lyrics_chars", max_lyrics_chars),
+    ):
+        if limit is not None and limit < 1:
+            raise ValueError(f"{name} must be greater than zero")
+
+    issues: list[PromptIssue] = []
+    if not fields.style_of_music.strip():
+        issues.append(PromptIssue("empty_style", "Style of Music is empty", "error"))
+    if fields.instrumental and fields.lyrics.strip():
+        issues.append(
+            PromptIssue(
+                "instrumental_lyrics_conflict",
+                "Instrumental is on but the Lyrics field contains text",
+                "error",
+            )
+        )
+    if fields.instrumental and fields.vocal_gender:
+        issues.append(
+            PromptIssue(
+                "instrumental_gender_conflict",
+                "Instrumental is on but Vocal Gender is set",
+                "error",
+            )
+        )
+    if not fields.instrumental and not fields.lyrics.strip():
+        issues.append(
+            PromptIssue(
+                "no_lyrics",
+                "No lyrics provided; supply lyrics or use Suno's lyric generation",
+            )
+        )
+    if fields.lyrics.strip():
+        lines = [line.strip() for line in fields.lyrics.splitlines() if line.strip()]
+        if lines and all(
+            line.startswith("[") and line.endswith("]") for line in lines
+        ):
+            issues.append(
+                PromptIssue(
+                    "section_skeleton",
+                    "Lyrics contains only section/direction tags; add actual lyrics if needed",
+                )
+            )
+    if max_style_chars is not None and len(fields.style_of_music) > max_style_chars:
+        issues.append(
+            PromptIssue(
+                "style_budget",
+                f"Style of Music exceeds the configured {max_style_chars}-character budget",
+            )
+        )
+    if max_lyrics_chars is not None and len(fields.lyrics) > max_lyrics_chars:
+        issues.append(
+            PromptIssue(
+                "lyrics_budget",
+                f"Lyrics exceeds the configured {max_lyrics_chars}-character budget",
+            )
+        )
+    return issues
+
+
 # SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
 # SPDX-License-Identifier: MPL-2.0

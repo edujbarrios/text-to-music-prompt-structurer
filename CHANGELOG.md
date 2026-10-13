@@ -4,6 +4,27 @@ All notable changes to this project are documented here. The project follows [Se
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-13
+
+### Added
+
+- Conservative extraction of explicit negative instrumentation and production constraints to Suno's Exclude field.
+- Public `extract_negative_constraints()` utility and `NegativeConstraints` result type.
+- Non-destructive `validate_suno_prompt()` preflight with structured findings, warnings and optional user-defined length budgets.
+- CLI `--check`, `--no-auto-exclude`, `--max-style-chars`, and `--max-lyrics-chars` switches.
+- More robust detection of vocal language in context, including multilingual instructions and genre false positives.
+- Expanded regression tests and workflow documentation for automated PyPI publishing.
+
+### Fixed
+
+- Prevent excluded musical features from reappearing in the positive Suno style description.
+- Preserve the first explicit spelling and order of deduplicated exclusions.
+
+### Documentation
+
+- Reframed the project as an advanced AI/NLP/LLM-informed prompting system for Suno.
+
+
 ## [0.2.0] - 2026-10-13
 
 ### Added
@@ -50,7 +71,8 @@ All notable changes to this project are documented here. The project follows [Se
 - Bundled, extensible JSON vocabularies.
 - Typed-package marker, automated tests, linting, and cross-platform CI.
 
-[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/edujbarrios/text-to-music-prompt-structurer/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/edujbarrios/text-to-music-prompt-structurer/releases/tag/v0.1.0
