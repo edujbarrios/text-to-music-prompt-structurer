@@ -1,316 +1,156 @@
 # Text-to-Music Prompt Structurer
 
-[![PyPI version](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=3775A9&cacheSeconds=300)](https://pypi.org/project/text-to-music-prompt-structurer/)
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-orange.svg?style=for-the-badge)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/text-to-music-prompt-structurer)](https://pypi.org/project/text-to-music-prompt-structurer/)
 [![CI](https://github.com/edujbarrios/text-to-music-prompt-structurer/actions/workflows/ci.yml/badge.svg)](https://github.com/edujbarrios/text-to-music-prompt-structurer/actions/workflows/ci.yml)
+[![MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-blue)](LICENSE)
 
-**Convert a musical idea into separate, paste-ready Suno Custom/Advanced fields**, not
-just a generic analysis of genres and instruments.
-
-The engine is deterministic, offline, dependency-free and compatible with Python 3.10+.
-It is built using NLP-inspired parsing techniques and does not require a hosted LLM.
-It detects known musical characteristics from free-form text and preserves the original
-creative direction by default so unfamiliar arrangement details are not silently lost.
-
-> **Project vision.** This library is an effort to design a sophisticated,
-> extensible music-prompting system that works effectively with Suno. Its author,
-> **Eduardo J. Barrios**, brings advanced knowledge of **artificial intelligence
-> (AI), natural language processing (NLP), and large language models (LLMs)**
-> to the design of interpretable musical instructions, structured song sections,
-> constraint extraction, and iterative prompt improvement. The goal is to
-> make complex music prompting more systematic, expressive, and reusable.
+Turn a musical idea into **separate Suno Custom/Advanced inputs**: Style of Music,
+Lyrics, Exclude, title and optional vocal controls. Works offline, has no mandatory
+dependencies and requires **Python 3.10+**.
 
 ## Install
 
-```bash
-python -m pip install --upgrade "text-to-music-prompt-structurer>=0.3.0"
-```
+~~~bash
+pip install --upgrade text-to-music-prompt-structurer
+~~~
 
-Version **0.3.0** improves prompt quality with automatic Exclude extraction, contextual
-language recognition and optional preflight validation. The Suno Custom/Advanced
-output introduced in 0.2.0 remains available.
+Verify:
 
-If PyPI has not yet indexed v0.3.0, the GitHub release/tag also supports installation:
+~~~bash
+text-to-music-prompt --help
+~~~
 
-```bash
-python -m pip install "git+https://github.com/edujbarrios/text-to-music-prompt-structurer.git@v0.3.0"
-```
+## Quick start
 
-This Git install requires Git and uses the exact v0.3.0 tag.
-
-## Get Suno-ready fields (default CLI output)
-
-```bash
+~~~bash
 text-to-music-prompt --title "Luz de madrugada" \
-  --exclude "autotune" \
-  --section "Intro" --cue "Intro=soft piano, no drums" \
-  --section "Verse 1" --cue "Verse 1=intimate, breathy lead" \
-  --section "Chorus" --cue "Chorus=full band, layered backing harmonies" \
-  --section "Bridge" --section "Final Chorus" --section "Outro" \
-  "neo soul with piano, nostalgic female vocals in spanish, d minor, 92 bpm"
-```
+  "neo soul and jazz, warm female vocals in Spanish, piano, 92 bpm, no autotune"
+~~~
 
-The command prints a **readable report of separate values** for Suno's creation fields.
-The headings are not Suno metatags:
+The result includes separate headings such as:
 
-```text
+~~~text
 TITLE
 Luz de madrugada
 
 STYLE OF MUSIC
-Neo Soul; Nostalgic mood; 92 BPM; D Minor key; Instrumentation: Piano; Vocals: Spanish-language, Female Lead; Creative direction: neo soul with piano, nostalgic female vocals in spanish, d minor, 92 bpm
-
-LYRICS
-[Intro]
-[soft piano, no drums]
-
-[Verse 1]
-[intimate, breathy lead]
-
-[Chorus]
-[full band, layered backing harmonies]
-
-[Bridge]
-
-[Final Chorus]
-
-[Outro]
+Genre blend: Neo Soul + Jazz; 92 BPM; ...
 
 EXCLUDE
-autotune
+Autotune
 
 VOCAL GENDER
 Female
-```
+~~~
 
-**Copy the value under each heading into its matching Suno field.**
-Do **not** paste the combined report into the Lyrics box.
-Bracketed section labels such as `[Verse 1]` and `[Chorus]` are common
-guidance markers; performance cues such as `[full band]` are best-effort
-directions, not guaranteed engine instructions.
+**Copy each value to the matching Suno field.** Do not paste the whole report
+into the Lyrics field. `--format json` produces equivalent separate properties,
+useful for apps and automation.
 
-The skeleton above intentionally contains **no invented lyrics**. An empty section
-is an editable template, **not a finished song lyric**.
-Write your own lines under the tags, supply a lyric file, or use Suno's
-own lyric-writing tools.
+## Lyrics and song sections
 
-## Complete custom lyrics
+Supply your own lyrics (preserved without rewriting):
 
-```bash
+~~~bash
+text-to-music-prompt --lyrics-file lyrics.txt \
+  "nostalgic soul, female vocals in Spanish, 90 bpm"
+~~~
+
+Or create a song structure with instructions for individual sections:
+
+~~~bash
 text-to-music-prompt \
-  --lyrics-file lyrics.txt \
-  --title "Luz de madrugada" \
-  --exclude "electric guitar" \
-  "warm neo soul, 92 bpm, female vocals in Spanish"
-```
+  --section "Intro" --cue "Intro=solo piano, no drums" \
+  --section "Verse 1" \
+  --section "Chorus" --cue "Chorus=restrained harmonies" \
+  --section "Chorus" --cue "Chorus#2=full band, huge final chorus" \
+  --section "Outro" --cue "Outro=piano only" \
+  "melancholic indie pop and jazz, intimate female voice, 105 bpm"
+~~~
 
-A UTF-8 `lyrics.txt` can contain existing section labels and lyrics:
+Repeated sections can have different cues. Use `--cue "Chorus#2=..."`
+to target the **second occurrence**; repeated unnumbered `Chorus=...` cues
+are assigned in order. The generated section skeleton does not invent lyrics.
 
-```text
-[Verse 1]
-La calle aún respira.
-Tu nombre en el cristal.
+## Python API
 
-[Chorus]
-Volverá la luz.
-Volverá la luz.
-```
-
-Its lyrics and section labels retain their exact wording (leading and trailing
-blank newlines are stripped); they are **not translated, summarized or rewritten**. Use either `--lyrics-file`
-or `--section`, not both.
-
-## Python API — complex sectional control
-
-```python
+~~~python
 from text_to_music_prompt_structurer import (
-    MusicPromptEngine,
-    SunoSection,
-    format_for_suno,
+    MusicPromptEngine, SunoSection, validate_suno_prompt,
 )
 
 engine = MusicPromptEngine()
 fields = engine.process_suno(
-    "cinematic neo soul in d minor, 92 bpm, warm female vocals in spanish",
+    "cinematic neo soul and jazz, 92 bpm, piano, female vocals in Spanish, no autotune",
     title="Luz de madrugada",
-    exclude=["autotune", "distorted guitars"],
     sections=[
-        SunoSection("Intro", cue="solo electric piano, restrained ambience"),
-        SunoSection("Verse 1", "La calle aún respira.", cue="intimate breathy lead"),
-        SunoSection("Pre-Chorus", "Todo empieza a brillar.", cue="rising strings"),
-        SunoSection("Chorus", "Volverá la luz.", cue="wide harmonies, full drums"),
-        SunoSection("Bridge", "Una voz en la ciudad.", cue="half-time feel"),
-        SunoSection("Final Chorus", "Volverá la luz.", cue="maximum emotional lift"),
-        SunoSection("Outro", cue="piano resolves softly"),
+        SunoSection("Verse 1", lyrics="Aún espero la luz.", cue="breathy solo lead"),
+        SunoSection("Chorus", lyrics="Volverá la luz.", cue="layered harmonies"),
     ],
 )
+print(fields.style_of_music)  # Suno -> Style of Music
+print(fields.lyrics)          # Suno -> Lyrics
+print(fields.exclude)         # Suno -> Exclude
+print(fields.to_dict())       # Structured Python dictionary
+print(validate_suno_prompt(fields))
+~~~
 
-print(fields.style_of_music)      # paste into Style of Music
-print(fields.lyrics)              # paste into Lyrics
-print(fields.exclude)             # paste into Advanced > Exclude
-print(fields.vocal_gender)        # optional Vocal Gender UI control
-print(format_for_suno(fields))    # readable combined presentation
-payload = fields.to_dict()        # JSON-compatible values for your own app
-```
+## Useful CLI flags
 
-For instrumental tracks, use `--instrumental`, or describe the track
-as instrumental and let `process_suno()` detect it. Instrumental mode
-rejects nonempty lyric lines rather than generating a contradictory request.
+| Flag | Purpose |
+| --- | --- |
+| `--format json` | Machine-readable Suno fields |
+| `--format legacy` | Previous `STYLE/MOOD/BPM` analysis |
+| `--lyrics-file FILE` | Use your own UTF-8 lyrics |
+| `--section NAME` | Append a song section; repeatable |
+| `--cue "NAME[#N]=TEXT"` | Direct a named section or the Nth occurrence |
+| `--exclude "TEXT"` | Add an explicit Exclude field item |
+| `--instrumental` | Enable instrumental-only mode |
+| `--style-notes "TEXT"` | Append production details |
+| `--no-original` | Omit the free-form description from the style summary |
+| `--no-auto-exclude` | Disable extraction of global `no X` directives |
+| `--check` | Print quality warnings to stderr |
+| `--max-style-chars N` | Optional user-defined style budget, with `--check` |
+| `--max-lyrics-chars N` | Optional user-defined lyrics budget, with `--check` |
 
-### CLI options
+~~~bash
+text-to-music-prompt --format json --check --max-style-chars 1000 \
+  "indie pop and jazz, piano, 105 bpm, without autotune"
+~~~
 
-| Option | Purpose |
-|---|---|
-| `--format suno` | Separate Suno fields (default) |
-| `--format json` | Machine-readable object with independent Suno fields |
-| `--format legacy` | Preserve original `STYLE/MOOD/BPM/...` output |
-| `--lyrics-file FILE` | Supply complete UTF-8 lyrics without rewriting |
-| `--section NAME` | Add an editable structural section (repeatable) |
-| `--cue NAME=DIRECTION` | Add a direction to the named section |
-| `--exclude TEXT` | Fill Suno's separate Exclude control (repeatable) |
-| `--instrumental` | Force Instrumental on |
-| `--style-notes TEXT` | Additional freeform style/arrangement instruction |
-| `--no-original` | Do not append the original creative description |
-| `--no-auto-exclude` | Disable automatic negative-constraint extraction |
-| `--check` | Display prompt-quality issues on stderr |
-| `--max-style-chars N` | Optional caller-defined style budget (with --check) |
-| `--max-lyrics-chars N` | Optional caller-defined lyrics budget (with --check) |
-| `--title TITLE` | Song title |
+**Constraints:** global `no drums` is mapped to Exclude, but
+`no drums in the intro, drums in the chorus` is kept as a
+**section-local musical direction**, not a global exclusion. The parser
+supports common Spanish phrasing such as `sin batería`, `voz femenina`,
+`voz rasgada`, `susurrado` and `coros`. Detected multi-genre blends retain
+their source order. Numeric BPM values must be complete, in the supported
+30–300 BPM range.
 
-Example JSON command:
+## Project vision
 
-```bash
-text-to-music-prompt --format json --title "Medianoche" \
-  --exclude "autotune" "dreamy synthwave 110 bpm female vocals"
-```
+Led by **Eduardo J. Barrios**, whose background includes advanced knowledge
+of **AI, NLP and LLMs**, this project aims to design an extensible, rigorous
+music-prompting system suited to Suno. The current implementation is a
+deterministic local parser, **not an LLM or a Suno API client**. Section tags
+and arrangement instructions are guidance rather than guaranteed generation
+controls.
 
-## Prompt-quality features (v0.3.0)
+## Development and releases
 
-### Automatically extract negative musical constraints
-
-Explicit negatives such as `no drums`, `without autotune`, `avoid reverb`
-and `sin batería` populate Suno's **Exclude** field. The negated instrument
-is removed from *positive* keyword detection and from the preserved creative
-summary so it does not contradict the Exclude field. The extractor uses a conservative,
-documented vocabulary and deliberately does not guess at open-ended negations.
-
-```python
-from text_to_music_prompt_structurer import MusicPromptEngine
-
-fields = MusicPromptEngine().process_suno(
-    "neo soul, warm piano, 92 bpm, no drums, without autotune",
-    preserve_description=False,
-)
-print(fields.exclude)         # Drums, Autotune
-print(fields.style_of_music)  # Neo Soul; Warm mood; 92 BPM; ...
-```
-
-Use `--no-auto-exclude` to disable extraction; explicit `--exclude` arguments
-are retained. Language detection is also context-aware: `Latin trap` does
-not automatically mean Latin-language vocals, and `Spanish guitar` on its
-own does not mean Spanish-language singing.
-
-### Validate without rewriting
-
-```python
-from text_to_music_prompt_structurer import validate_suno_prompt
-
-issues = validate_suno_prompt(
-    fields,
-    max_style_chars=1000,   # your own budget, not an official Suno limit
-    max_lyrics_chars=3000,
-)
-for issue in issues:
-    print(issue.severity, issue.code, issue.message)
-```
-
-This checks missing styles, empty or skeleton-only lyrics, conflicting
-instrumental/vocal controls and optionally caller-defined length budgets.
-It never rewrites existing lyrics, and returns machine-readable issue codes.
-
-From the CLI, use `--check` for diagnostics on **stderr** while retaining
-clean prompt output on stdout (including valid JSON):
-
-```bash
-text-to-music-prompt --format json --check \
-  --max-style-chars 1000 "cinematic neo soul without drums"
-```
-
-### Automated releases to GitHub and PyPI
-
-Publishing runs through `.github/workflows/release.yml` whenever the package
-version is updated in `pyproject.toml` on `main`. It tests, lints, builds and
-checks artifacts, then publishes to PyPI through GitHub Actions OIDC **Trusted
-Publishing**. A GitHub release with wheel and source distribution is also
-created. PyPI must first have a matching Trusted Publisher under the project's
-Publishing settings: owner `edujbarrios`, repository
-`text-to-music-prompt-structurer`, workflow `release.yml`, environment
-`pypi`. There is no need for a long-lived PyPI token.
-
-## Outputs and migration
-
-- **Suno human-readable report**: default CLI mode; paste values individually into Suno.
-- **JSON**: `--format json` keeps `style_of_music`, `lyrics`, `title`, `exclude`,
-  `instrumental`, `vocal_gender` and `lyric_brief` as independent properties.
-- **Legacy analysis**: `--format legacy` or Python `format_prompt()` for existing
-  integrations that need the `STYLE/MOOD/BPM` report.
-
-A title is optional; `exclude` and `instrumental` are Advanced controls in Suno,
-not strings to paste inside lyrics. `vocal_gender` is a suggested UI control when
-unambiguous vocal type is detected. `lyric_brief` is **not** a Suno lyrics field.
-
-## Legacy API / compatibility
-
-`MusicPromptEngine().process(text)` still returns the existing
-`MusicPrompt` dataclass with detected genre, subgenre, mood, BPM, key,
-instruments, production, language, voice type, vocal style, rhythm,
-structure, era and theme. `format_prompt(prompt)` still generates
-the previous `STYLE: ...\nMOOD: ...` analysis view.
-
-**Changed in 0.2:** `format_for_suno(prompt)` now renders actual Suno
-fields instead of aliasing `format_prompt()`. The CLI defaults to Suno
-fields, but `--format legacy` retains its previous display.
-
-`SunoPrompt` and `SunoPromptEngine` remain aliases of the original
-`MusicPrompt` and `MusicPromptEngine`. Use `SunoFields` when you need
-paste-ready Suno controls.
-
-An optional `lyric_brief` in `SunoFields` is explicitly a theme brief
-for a *lyric-generation tool*. It is **not** auto-inserted into Lyrics
-because prose requests may be sung literally.
-
-## Supported and unsupported behavior
-
-This package **does not** connect to Suno, generate audio, guarantee exact
-timing, guarantee every section cue will be obeyed, or use an LLM to write
-new lyrics. Some free-form details are outside its keyword vocabulary;
-the original source sentence is preserved as additional musical guidance
-unless `--no-original` is set. Manually review ambiguous instructions
-or contradictory constraints before pasting into Suno.
-
-Official source references for the field design and conventions:
-
-- [Suno: How to Make a Song](https://suno.com/hub/how-to-make-a-song) — Style, Lyrics and section labels
-- [Suno: v6 FAQ](https://help.suno.com/en/articles/13924481) — complex instructions and current model family
-- [Suno: Exclude elements](https://help.suno.com/en/articles/3161921) — the separate Exclude control
-- [Suno: Vocal Gender](https://help.suno.com/en/articles/10153473) — vocal gender in Advanced Options
-- [Suno: Lyrics improvements](https://suno.com/release-notes/lyrics-improvements-on-web) — structure labels in the editor
-
-## Development
-
-```bash
+~~~bash
 git clone https://github.com/edujbarrios/text-to-music-prompt-structurer.git
 cd text-to-music-prompt-structurer
-python -m pip install -e ".[dev]"
-python -m pytest
+pip install -e ".[dev]"
+pytest
 ruff check .
-```
+~~~
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) to extend the vocabularies.
+Merging an updated package version in `pyproject.toml` into `main`
+automatically triggers [GitHub Actions](.github/workflows/release.yml) to
+test, build, publish to PyPI (OIDC Trusted Publishing) and attach distributions
+to the corresponding GitHub Release. The PyPI project must have a Trusted
+Publisher for `edujbarrios/text-to-music-prompt-structurer`,
+workflow `release.yml`, environment `pypi`.
 
-## License
-
-Copyright © 2026 Eduardo J. Barrios.
-
-Licensed under the [Mozilla Public License 2.0](LICENSE). See
-[NOTICE](NOTICE) for attribution details.
+See [CHANGELOG](CHANGELOG.md), [CONTRIBUTING](CONTRIBUTING.md)
+and the [MPL-2.0 license](LICENSE).
