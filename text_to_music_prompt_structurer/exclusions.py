@@ -82,6 +82,7 @@ class NegativeConstraints:
 
     cleaned_description: str
     excludes: tuple[str, ...]
+    detection_description: str = ""
 
 
 def extract_negative_constraints(description: str) -> NegativeConstraints:
@@ -101,7 +102,12 @@ def extract_negative_constraints(description: str) -> NegativeConstraints:
         return " "
 
     cleaned = _NEGATION.sub(substitute, description)
-    return NegativeConstraints(cleaned_description=cleaned, excludes=tuple(excludes))
+    detection = _NEGATION.sub(" ", description)
+    return NegativeConstraints(
+        cleaned_description=cleaned,
+        excludes=tuple(excludes),
+        detection_description=detection,
+    )
 
 
 # SPDX-FileCopyrightText: 2026 Eduardo J. Barrios
