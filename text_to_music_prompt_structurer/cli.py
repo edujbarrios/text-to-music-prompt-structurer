@@ -4,12 +4,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections.abc import Sequence
 from pathlib import Path
 
 from text_to_music_prompt_structurer.engine import MusicPromptEngine
 from text_to_music_prompt_structurer.formatter import format_prompt
-from text_to_music_prompt_structurer.suno import SunoSection, render_suno_prompt
+from text_to_music_prompt_structurer.suno import (
+    SunoSection,
+    render_suno_prompt,
+    validate_suno_prompt,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -59,6 +64,22 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="omit the original description from Style of Music (more concise)",
     )
+    parser.add_argument(
+        "--no-auto-exclude",
+        action="store_true",
+        help="disable extraction of explicit negatives such as no drums/sin batería",
+    )
+    parser.add_argument(
+        "--check", action="store_true", help="show non-destructive preflight findings on stderr"
+    )
+    parser.add_argument(
+        "--max-style-chars", type=int,
+        help="optional self-imposed character budget for Style of Music",
+    )
+    parser.add_argument(
+        "--max-lyrics-chars", type=int,
+        help="optional self-imposed character budget for Lyrics",
+    )
     return parser
 
 
@@ -105,9 +126,22 @@ def main(argv: Sequence[str] | None = None) -> int:
             instrumental=args.instrumental,
             style_notes=args.style_notes,
             preserve_description=not args.no_original,
+            auto_exclude=not args.no_auto_exclude,
         )
     except (OSError, ValueError) as error:
         parser.error(str(error))
+
+    if args.check:
+        try:
+            issues = validate_suno_prompt(
+                fields,
+                max_style_chars=args.max_style_chars,
+                max_lyrics_chars=args.max_lyrics_chars,
+            )
+        except ValueError as error:
+            parser.error(str(error))
+        for issue in issues:
+            print(f"{issue.severity.upper()} [{issue.code}]: {issue.message}", file=sys.stderr)
 
     if args.format == "json":
         print(json.dumps(fields.to_dict(), ensure_ascii=False, indent=2))
