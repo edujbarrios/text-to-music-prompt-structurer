@@ -190,10 +190,7 @@ def build_suno_prompt(
     else:
         lyric_text = ""
 
-    if isinstance(exclude, str):
-        excluded = exclude.strip()
-    else:
-        excluded = ", ".join(_unique(exclude))
+    excluded = exclude.strip() if isinstance(exclude, str) else ", ".join(_unique(exclude))
 
     genders = {
         gender for gender in ("Male", "Female")
