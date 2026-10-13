@@ -23,12 +23,23 @@ class GenreDetector(Detector):
         self.genres = dict(sorted(genres.items(), key=lambda x: len(x[0]), reverse=True))
 
     def detect(self, text, prompt):
+        # Resolve overlapping aliases (indie pop vs pop) by preferring
+        # longer matches, while retaining distinct genre blends in source order.
+        candidates = []
         for key, val in self.genres.items():
-            if re.search(rf"(?<!\w){re.escape(key)}(?!\w)", text):
-                prompt.genre = val["genre"]
-                prompt.subgenre = val["subgenre"]
-                return
-
+            for match in re.finditer(rf"(?<!\w){re.escape(key)}(?!\w)", text):
+                candidates.append((match.start(), match.end(), val))
+        candidates.sort(key=lambda hit: (hit[0], -(hit[1] - hit[0])))
+        accepted = []
+        for start, end, value in candidates:
+            if not any(start < right and end > left for left, right, _ in accepted):
+                accepted.append((start, end, value))
+        if accepted:
+            prompt.genre = accepted[0][2]["genre"]
+            prompt.subgenre = accepted[0][2]["subgenre"]
+            prompt.genres = list(dict.fromkeys(
+                value["subgenre"] or value["genre"] for _, _, value in accepted
+            ))
 
 class KeywordListDetector(Detector):
     """Generic detector for keyword-based list attributes."""
@@ -49,7 +60,9 @@ class VocalAttributeDetector(KeywordListDetector):
     """Detect a vocal attribute only when the prompt asks for a voice."""
 
     _vocal_context = re.compile(
-        r"\b(vocal|vocals|voice|voices|singer|singers|singing|sung|choir|duet)\b"
+        r"\b(?:vocal|vocals|voice|voices|singer|singers|singing|sung|choir|duet|"
+        r"voz|voces|cantante|cantantes|cantado|cantada|coro|coros|susurrado|"
+        r"susurrada|susurros|rasgada|rasgado)\b"
     )
 
     def detect(self, text, prompt):
@@ -121,10 +134,15 @@ class BPMDetector(Detector):
     """Detects BPM (beats per minute) from text."""
 
     def detect(self, text, prompt):
-        m = re.search(r"(\d{2,3})\s*bpm", text)
-        if m:
-            prompt.bpm = int(m.group(1))
-
+        # Never match a substring of 1024 bpm, 2000 bpm or 120.5 bpm.
+        # Stay within a conservative musical range instead of guessing.
+        match = re.search(
+            r"(?<![\w.])(\d{2,3})(?![\d.])\s*(?:bpm|beats per minute)\b", text
+        )
+        if match:
+            value = int(match.group(1))
+            if 30 <= value <= 300:
+                prompt.bpm = value
 
 class ThemeDetector(Detector):
     """Detects song theme from text."""
