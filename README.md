@@ -2,6 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/text-to-music-prompt-structurer?style=for-the-badge&logo=pypi&logoColor=white&label=PyPI&color=3775A9&cacheSeconds=300)](https://pypi.org/project/text-to-music-prompt-structurer/)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-orange.svg?style=for-the-badge)](LICENSE)
+[![CI](https://github.com/edujbarrios/text-to-music-prompt-structurer/actions/workflows/ci.yml/badge.svg)](https://github.com/edujbarrios/text-to-music-prompt-structurer/actions/workflows/ci.yml)
 
 **Convert a musical idea into separate, paste-ready Suno Custom/Advanced fields**, not
 just a generic analysis of genres and instruments.
@@ -17,8 +18,11 @@ creative direction by default so unfamiliar arrangement details are not silently
 ## Install
 
 ```bash
-python -m pip install text-to-music-prompt-structurer
+python -m pip install --upgrade "text-to-music-prompt-structurer>=0.2.0"
 ```
+
+Version **0.2.0** introduces the Suno-specific output. Existing installs of 0.1.x
+still use the old analysis format; upgrade to use the examples below.
 
 ## Get Suno-ready fields (default CLI output)
 
@@ -32,7 +36,8 @@ text-to-music-prompt --title "Luz de madrugada" \
   "neo soul with piano, nostalgic female vocals in spanish, d minor, 92 bpm"
 ```
 
-Output has separately labeled fields matching Suno's creation interface:
+The command prints a **readable report of separate values** for Suno's creation fields.
+The headings are not Suno metatags:
 
 ```text
 TITLE
@@ -70,7 +75,8 @@ Bracketed section labels such as `[Verse 1]` and `[Chorus]` are common
 guidance markers; performance cues such as `[full band]` are best-effort
 directions, not guaranteed engine instructions.
 
-The skeleton above intentionally contains **no invented lyrics**.
+The skeleton above intentionally contains **no invented lyrics**. An empty section
+is an editable template, **not a finished song lyric**.
 Write your own lines under the tags, supply a lyric file, or use Suno's
 own lyric-writing tools.
 
@@ -96,8 +102,8 @@ Volverá la luz.
 Volverá la luz.
 ```
 
-Its lyrics are copied verbatim (apart from trailing newlines); they are
-**not translated, summarized or rewritten**. Use either `--lyrics-file`
+Its lyrics and section labels retain their exact wording (leading and trailing
+blank newlines are stripped); they are **not translated, summarized or rewritten**. Use either `--lyrics-file`
 or `--section`, not both.
 
 ## Python API — complex sectional control
@@ -159,6 +165,18 @@ Example JSON command:
 text-to-music-prompt --format json --title "Medianoche" \
   --exclude "autotune" "dreamy synthwave 110 bpm female vocals"
 ```
+
+## Outputs and migration
+
+- **Suno human-readable report**: default CLI mode; paste values individually into Suno.
+- **JSON**: `--format json` keeps `style_of_music`, `lyrics`, `title`, `exclude`,
+  `instrumental`, `vocal_gender` and `lyric_brief` as independent properties.
+- **Legacy analysis**: `--format legacy` or Python `format_prompt()` for existing
+  integrations that need the `STYLE/MOOD/BPM` report.
+
+A title is optional; `exclude` and `instrumental` are Advanced controls in Suno,
+not strings to paste inside lyrics. `vocal_gender` is a suggested UI control when
+unambiguous vocal type is detected. `lyric_brief` is **not** a Suno lyrics field.
 
 ## Legacy API / compatibility
 
