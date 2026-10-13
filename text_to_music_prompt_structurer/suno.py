@@ -183,7 +183,10 @@ def build_suno_prompt(
     elif lyrics.strip():
         lyric_text = lyrics.strip("\n")
     elif prompt.structure and not instrumental:
-        lyric_text = _render_sections(prompt.structure)
+        # Broad analysis vocab includes names that are not safe lyric tags.
+        # Keep only recognized section markers in a Suno-facing skeleton.
+        supported = [name for name in prompt.structure if _SECTION_PATTERN.fullmatch(name)]
+        lyric_text = _render_sections(supported)
     else:
         lyric_text = ""
 
